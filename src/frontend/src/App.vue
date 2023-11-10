@@ -1,6 +1,20 @@
-<script setup>
+<script>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
+
+import API from '@/api';
+
+export default {
+    methods:{
+      async addUsuario(){
+        await API.addUsuario();
+      }
+    },
+    mounted(){
+      this.addUsuario();
+    }
+}
+
 </script>
 
 <template>
