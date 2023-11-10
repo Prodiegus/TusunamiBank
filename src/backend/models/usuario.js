@@ -2,10 +2,10 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const usuarioSchema = new Schema({
-    nombre: String,
-    correo: {type:String,unique:true},
-    contrasena:String,
-    direccion:String,
+    apellidoPaterno: String,
+    apellidoMaterno: String,
+    nombres: String,
+    rut: String,
 },{ versionKey: false }
 );
 
