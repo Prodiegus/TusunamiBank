@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 const app = express();
 
 
-const URL='';
+const URL='mongodb+srv://banco-tusunami:tPvTtNmPVdoVkiUr@bando-tusunami.hbdava9.mongodb.net/?retryWrites=true&w=majority';
 
 const options = {useNewUrlParser: true};
 // Or using promises
