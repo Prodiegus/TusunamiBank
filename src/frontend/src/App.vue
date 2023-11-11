@@ -1,6 +1,13 @@
+<!-- Root de la app-->
+<!-- Aqui debería estar la lectura de permanencia de datos en el localstorage-->
+<!-- Si no existe datos en localstorage, es porque es un usuario nuevo o se deslogueó 
+      con anterioridad
+-->
+
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import index from './pages/index.vue';
+import home from './pages/home.vue';
+
 import { onMounted } from 'vue';
 import API from '@/api';
 
@@ -14,47 +21,17 @@ onMounted(() => {
   //addUsuario();
 });
 
+const newAccount = true; // Placeholder para implementar lo del localstorage despues
+
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div>
+    <index v-if="newAccount"></index>
+    <home v-else></home>
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>

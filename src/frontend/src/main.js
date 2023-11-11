@@ -15,11 +15,15 @@ import 'primeicons/primeicons.css'
 import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
 
+// importación de rutas
+import router from './router';
+
 const app = createApp(App)
 
 //Uso de dependencias
 app.use(createPinia())
 app.use(PrimeVue);
 app.use(ToastService);
+app.use(router);
 
 app.mount('#app')
