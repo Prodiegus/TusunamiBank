@@ -1,19 +1,18 @@
-<script>
+<script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
-
+import { onMounted } from 'vue';
 import API from '@/api';
 
-export default {
-    methods:{
-      async addUsuario(){
-        await API.addUsuario();
-      }
-    },
-    mounted(){
-      this.addUsuario();
-    }
-}
+
+// Forma de crear metodos
+const addUsuario = async () => {
+  await API.addUsuario();
+};
+// Los metodos que involucren el ciclo del programa deben ser importados primero
+onMounted(() => {
+  //addUsuario();
+});
 
 </script>
 
