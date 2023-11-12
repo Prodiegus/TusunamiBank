@@ -22,7 +22,6 @@ import imgUrl from '../../assets/pinera.png';
 
       <div class="contenedor">
         <div class="columna1">
-          <!-- Contenido de la primera columna -->
           <div class="fila" style="color: red; text-align: center; font-weight:800; font-size: 40px ;">Bancos <br>Tusunami
           </div>
           <div>
@@ -31,7 +30,7 @@ import imgUrl from '../../assets/pinera.png';
         </div>
 
         <div class="columna2">
-          <!-- Contenido de la segunda columna -->
+
           <div style="height: 70vh;background-color: white;border-radius: 30px;">
             <div class="fila"
               style="text-align: center;color:#0f45ab; margin-top: 30px;font-weight: 800;font-size: 30px;">
@@ -107,38 +106,30 @@ body {
   padding: 10px;
 }
 
-/* Estilos para el contenedor del cuadro de texto */
+
 .input-container {
   position: relative;
   margin-bottom: 20px;
-  /* Espacio entre el cuadro de texto y el siguiente elemento */
+
 }
 
-/* Estilos para el cuadro de texto */
 .underline-input {
   width: 100%;
   border: none;
   border-bottom: 2px solid #0f45ab;
-  /* Línea inferior */
   padding-bottom: 0px;
-  /* Espaciado para separar la línea del texto */
   font-size: 16px;
-  /* Tamaño de fuente, ajusta según sea necesario */
 }
 
 
 
 
-/* Estilos para el botón */
 .boton-iniciar-sesion {
   display: block;
   margin: 0 auto;
-  /* Centrar el botón horizontalmente */
   padding: 10px 20px;
   background-color: #ff0000;
-  /* Rojo */
   color: #ffffff;
-  /* Blanco */
   border: none;
   border-radius: 5px;
   font-size: 16px;
