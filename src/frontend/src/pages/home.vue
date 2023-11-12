@@ -14,13 +14,16 @@ import mainPanel from '../components/home/mainPanel.vue';
 
 <template>
     <div>
-        <Row>
+        <!--<Row>
             <topPanel></topPanel>
         </Row>
+    -->
         <Row>
-            <Column>
+            
+            <!--<Column>
                 <leftPanel></leftPanel>
             </Column>
+        -->
             <Column>
                 <mainPanel></mainPanel>
             </Column>
