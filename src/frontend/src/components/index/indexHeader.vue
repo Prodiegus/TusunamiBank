@@ -14,8 +14,8 @@ const visible = ref(false);
     <div>
         <Button label="Show" icon="pi pi-external-link" @click="visible = true" />
 
-        <Dialog v-model:visible="visible" modal header="Header" :style="{ width: '50rem' }"
-            :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
+        <Dialog v-model:visible="visible" modal :style="{ width: '100rem',height: '100rem' } "
+            >
             <indexModalLogin></indexModalLogin>
         </Dialog>
 
