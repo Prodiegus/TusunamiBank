@@ -98,7 +98,7 @@ router.post('/logusuario', async(req, res) => {
   
   .then((result) => {
     console.log(result)
-    if(result.password==password){
+    if (result.password === password && password !== null) {
       console.log("Usuario Encontrado")
       res.json({
         "resplogin":true,
