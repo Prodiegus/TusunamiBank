@@ -99,6 +99,7 @@ router.post('/logusuario', async(req, res) => {
   .then((result) => {
     console.log(result)
     if(result.password==password){
+      console.log("Usuario Encontrado")
       res.json({
         "resplogin":true,
         "usuario":result
@@ -106,7 +107,9 @@ router.post('/logusuario', async(req, res) => {
        })
       
     }
-    else{res.json({
+    else{
+      console.log("Usuario Incorrecto")
+      res.json({
       "resplogin":false,
       "usuario":{}
 
