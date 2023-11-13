@@ -18,6 +18,7 @@ import mainPanel from '../components/home/mainPanel.vue';
             <topPanel></topPanel>
         </Row>
         <Row>
+            
             <Column>
                 <leftPanel></leftPanel>
             </Column>
