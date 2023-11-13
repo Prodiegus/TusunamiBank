@@ -5,7 +5,10 @@ const usuarioSchema = new Schema({
     apellidoPaterno: String,
     apellidoMaterno: String,
     nombres: String,
-    rut: String,
+    rut: { type: String, unique: true, required: true },
+    email: { type: String, unique: true, required: true, lowercase: true },
+    password: String,
+    createdAt: { type: Date, default: Date.now },
 },{ versionKey: false }
 );
 
