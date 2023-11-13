@@ -1,46 +1,66 @@
 <script setup>
     import Button from 'primevue/button';
+    
 </script>
 
 <template>
-    <body>
-        <div class="contenedor">
-        <div class="boton">
-            <img src="../icons/pitufo.jpg" class="icono">
-            <Button label="Inicio" link />
-        </div>
-        
-        <div class="boton">
-            <img src="../icons/Cuentas.jpg" class="icono">
-            <Button label="Cuenta" link />
-        </div>
-        
-        <div class="boton">
-            <img src="../icons/bob.jpg" class="icono">
-            <Button label="Retiros" link />
-        </div>
-        
-        <div class="boton">
-            <img src="../icons/Deposito.jpg" class="icono">
-            <Button label="Depositos" link />
-        </div>
+    <div class="primaldiv">
+        <card class="contenedor">
+            <div>
+                <div>
+                    <img src="../icons/pitufo.jpg" class="icono">
+                    <Button class="boton" label="Inicio" link />
+                </div>
+                
+                <div>
+                    <img src="../icons/Cuentas.jpg" class="icono">
+                    <Button class="boton" label="Cuenta" link />
+                </div>
+                
+                <div>
+                    <img src="../icons/bob.jpg" class="icono">
+                    <Button class="boton" label="Retiros" link />
+                </div>
+                
+                <div>
+                    <img src="../icons/Deposito.jpg" class="icono">
+                    <Button class="boton" label="Depositos" link />
+                </div>
 
-        <div class="boton">
-            <img src="../icons/Comision.jpg" class="icono">
-            <Button label="Comisiones" link />
-        </div>
-        
+                <div>
+                    <img src="../icons/Comision.jpg" class="icono">
+                    <Button class="boton" label="Comisiones" link />
+                </div>
+            
+            </div>
+        </card>
     </div>
-    </body>
+    
+        
+    
     
 </template>
 
 <style>
-.body {
+.boton{
+    color:#ffffff;
+}
+.contenedor{
     background-color: #D52B1E;
+    display:flex;
+    height: 100%;
+    width: 100%;
+    flex: 1;
+    margin: 0;
 }
 .icono{
     width: 75px;
     height: 75px;
+}
+.primaldiv{
+    width: 100%; 
+    display: flex; 
+    align-items: left;   
+        
 }
 </style>

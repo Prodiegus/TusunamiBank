@@ -81,7 +81,8 @@
     .divPrincipal{
         height: 100%; 
         display: flex; 
-        align-items: left;   
+        align-items: left; 
+        background-color: #d52b1e;
     }
     .fondoDerecha {
         background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Retrato_Oficial_Presidente_Pi%C3%B1era_2018.jpg/1200px-Retrato_Oficial_Presidente_Pi%C3%B1era_2018.jpg); /* Reemplaza con la ruta correcta de tu imagen */
