@@ -3,6 +3,7 @@ import './assets/main.css'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
+import { initializeApp } from 'firebase/app';
 
 // Para cambiar el tema de PrimeVue, elegir otro import de: https://primevue.org/theming/
 import 'primevue/resources/themes/lara-light-blue/theme.css'
@@ -17,8 +18,21 @@ import ToastService from 'primevue/toastservice';
 
 // importación de rutas
 import router from './router';
+const firebaseConfig = {
+    apiKey: "AIzaSyAjfnH5xIIyv1l_MX23WQ7kUeeUVMq3cg0",
+    authDomain: "hola-5d173.firebaseapp.com",
+    projectId: "hola-5d173",
+    storageBucket: "hola-5d173.appspot.com",
+    messagingSenderId: "861416750915",
+    appId: "1:861416750915:web:2055906cb5f93d479979f6",
+    measurementId: "G-RJF967NYE6"
+};
+
+const firebase = initializeApp(firebaseConfig);
+console.log(firebase)
 
 const app = createApp(App)
+
 
 //Uso de dependencias
 app.use(createPinia())
