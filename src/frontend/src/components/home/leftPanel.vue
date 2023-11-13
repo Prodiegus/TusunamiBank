@@ -20,7 +20,7 @@
                 </div>
                 
                 <div>
-                    <img src="../icons/bob.jpg" class="icono">
+                    <img src="../icons/Bob.jpg" class="icono">
                     <Button class="boton" label="Retiros" />
                     <hr class="linea">
                 </div>
