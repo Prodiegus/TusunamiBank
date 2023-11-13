@@ -8,12 +8,21 @@ import usuarioSchema from '../models/usuario';
 
 router.post('/addUsuario', async(req, res) => {
   const body = req.body;  
- 
-  const usuario = usuarioSchema(body)       
-  await usuario.save()
-  .then((result) => {
+  const usuario = usuarioSchema(body)
+  console.log("addUsuario",usuario)       
+  await usuario.save().then((result) => {
     res.json(result)
-    
+  })
+  .catch((err) => {
+    console.log(err)
+    res.json(err)
+  }); 
+  }
+);
+
+router.get('/getNumeroUsuarios', async(req, res) => {
+  await usuarioSchema.countDocuments().then((result) => {
+    res.json(result)
   })
   .catch((err) => {
     console.log(err)

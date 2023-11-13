@@ -16,7 +16,7 @@
     <form @submit.prevent="login">
     <div class="input-container">
         <label style="color:#103ed4" for="username">Nombre Completo:</label>
-        <input type="text" id="username" v-model="usuario" required>
+        <input type="text" id="username" v-model="completeName" required>
     </div>
     <div class="input-container">
         <label style="color:#103ed4" for="rut">Rut:</label>
@@ -24,17 +24,17 @@
     </div>
     <div class="input-container">
         <label style="color:#103ed4" for="password">Correo electrónico:</label>
-        <input type="password" id="correo electronico" v-model="correoelectronico" required>
+        <input type="password" id="correo electronico" v-model="email" required>
     </div>
     <div class="input-container">
         <label style="color:#103ed4" for="password">Contraseña:</label>
-        <input type="password" id="password" v-model="contraseña" required>
+        <input type="password" id="password" v-model="password" required>
     </div>
     <div class="input-container">
         <label style="color:#103ed4" for="password">Sucursal:</label>
         <input type="password" id="sucursal" v-model="sucursal" required>
     </div>
-    <v-btn  block color="#ee451b" type="submit" @click="crearcuenta" >Registrar</v-btn>
+    <v-btn  block color="#ee451b" type="submit" @click="crearUsuario" >Registrar</v-btn>
     <div>
         <h3 style="color:#103ed4">¿Ya tienes cuenta? 
         <router-link to="login">Iniciar Sesión</router-link> 
@@ -47,22 +47,38 @@
   </template>
   
   <script>
+    import API from '@/API.js';
   export default {
     data() {
       return {
-        username: '',
+        completeName: '',
         rut: '',
-        correoelectronico: '',
-        contraseña: '',
+        email: '',
+        password: '',
         sucursal: '',
       };
     },
     methods: {
+        async crearUsuario(){
+            const nombre = this.completeName.split(' '); 
+            const numeroDeUsuarios = await API.getNumeroUsuarios();
+            await API.addUsuario({ 
+                    "nombres":nombre[0]+ " " + nombre[1],
+                    "apellidoPaterno": nombre[2],
+                    "apellidoMaterno": nombre[3],
+                    "email": this.email.toLowerCase(),
+                    "rut": this.rut,
+                    "password": this.password,
+                    "sucursal": this.sucursal,
+                    "idUsuario": numeroDeUsuarios + 1
+                })
+            console.log('Creando usuario...');
+        },
       login() {
         // Lógica de inicio de sesión
         console.log('Iniciando sesión...');
       },
-    },
+    }
   };
   </script>
   
