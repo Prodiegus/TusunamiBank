@@ -6,6 +6,7 @@ const usuarioSchema = new Schema({
     apellidoMaterno: String,
     nombres: String,
     rut: String,
+    password: String
 },{ versionKey: false }
 );
 

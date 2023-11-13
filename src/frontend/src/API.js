@@ -20,5 +20,18 @@ export default class API {
             return error.response.data
         }
     }
+    
+    static async logusuario(data) {
+        try {
+
+            const res = await axios.post(url + "logusuario", data)
+            return res.data
+
+        } catch (error) {
+
+            return error.response.data
+
+        }
+    }
 
 }
