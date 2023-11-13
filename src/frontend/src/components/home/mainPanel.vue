@@ -18,6 +18,63 @@
         sucursal:'Curicó'
     };
 </script>
+
+<template>
+    <div class="divPrincipal">
+        <row>
+        <Card class="cardPrincipal">
+            <template #title > 
+                <div style="text-align: center; font-weight: bold; color:black;">Cuenta {{ infoCuenta.tipo }} </div>
+            </template>
+          <template #content>
+            <column style="height:40%">
+            <Card class="cardCuenta">
+              <template #content>
+                Cuenta: #{{ infoCuenta.numCuenta }} <br>
+                Saldo: {{infoCuenta.saldo}} <br>
+                Sucursal: {{infoCuenta.sucursal}}<br>
+                <br>
+                <div>
+                    <row>
+                        <Button label="Realizar Depósito" text raised  class="botonDeposito"/>
+                    </row>
+                    <row>
+                        <Button label="Realizar Retiro" text raised class="botonRetiro"/>
+                    </row>
+                </div>
+              </template>
+            </Card>
+            </column>
+            <column>
+                <Card class="cardScroll" style="height: 60%;">
+                <template #title><div style="text-align: center; font-weight: bold; color:black;">Últimas Transacciones</div> </template>
+                <template #content>
+                    <VirtualScroller :items="listaTransacciones" :itemSize="100" class="scrollTransaccion">
+                    <template v-slot:item="{ item }">
+                        <Card class="cardTransaccion">
+                        <template #content>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                                <div style="font-weight: bold;">{{ item.fecha }}</div>
+                                <div style="display: flex; justify-content: space-between; width: 100%;">
+                                  <div>{{ item.tipo }} Sucursal {{ item.sucursal }}</div>
+                                  <div class="montoDerecha">${{ item.monto }}</div>
+                                </div>
+                              </div>
+                        </template>
+                        </Card>
+                    </template>
+                    </VirtualScroller>
+                </template>
+                </Card>
+            </column>
+          </template>
+        </Card>
+        </row>
+        <row class="fondoDerecha">
+        </row>
+    </div>
+  </template>
+
 <style>
     .montoDerecha{
         font-size: 20px;
@@ -92,59 +149,3 @@
         width: 26.2vw; 
       }
 </style>
-<template>
-    <div class="divPrincipal">
-        <row>
-        <Card class="cardPrincipal">
-            <template #title > 
-                <div style="text-align: center; font-weight: bold; color:black;">Cuenta {{ infoCuenta.tipo }} </div>
-            </template>
-          <template #content>
-            <column style="height:40%">
-            <Card class="cardCuenta">
-              <template #content>
-                Cuenta: #{{ infoCuenta.numCuenta }} <br>
-                Saldo: {{infoCuenta.saldo}} <br>
-                Sucursal: {{infoCuenta.sucursal}}<br>
-                <br>
-                <div>
-                    <row>
-                        <Button label="Realizar Depósito" text raised  class="botonDeposito"/>
-                    </row>
-                    <row>
-                        <Button label="Realizar Retiro" text raised class="botonRetiro"/>
-                    </row>
-                </div>
-              </template>
-            </Card>
-            </column>
-            <column>
-                <Card class="cardScroll" style="height: 60%;">
-                <template #title><div style="text-align: center; font-weight: bold; color:black;">Últimas Transacciones</div> </template>
-                <template #content>
-                    <VirtualScroller :items="listaTransacciones" :itemSize="100" class="scrollTransaccion">
-                    <template v-slot:item="{ item }">
-                        <Card class="cardTransaccion">
-                        <template #content>
-                            <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                                <div style="font-weight: bold;">{{ item.fecha }}</div>
-                                <div style="display: flex; justify-content: space-between; width: 100%;">
-                                  <div>{{ item.tipo }} Sucursal {{ item.sucursal }}</div>
-                                  <div class="montoDerecha">${{ item.monto }}</div>
-                                </div>
-                              </div>
-                        </template>
-                        </Card>
-                    </template>
-                    </VirtualScroller>
-                </template>
-                </Card>
-            </column>
-          </template>
-        </Card>
-        </row>
-        <row class="fondoDerecha">
-        </row>
-    </div>
-  </template>
-  
