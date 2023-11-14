@@ -86,12 +86,12 @@
 
                     }else{
                        
-                       /*  Swal.fire({
+                        Swal.fire({
                         icon: 'error',
                         title: 'Error de Registro',
                         text: 'Rut o Email ya está en uso'    
                         })
-                        console.log("Error de registro") */
+                        console.log("Error de registro")
           }
         })
         },
