@@ -23,16 +23,16 @@
         <input type="text" id="rut" v-model="rut" required>
     </div>
     <div class="input-container">
-        <label style="color:#103ed4" for="password">Correo electrónico:</label>
-        <input type="password" id="correo electronico" v-model="email" required>
+        <label style="color:#103ed4" for="text">Correo electrónico:</label>
+        <input type="text" id="correo electronico" v-model="email" required>
     </div>
     <div class="input-container">
         <label style="color:#103ed4" for="password">Contraseña:</label>
         <input type="password" id="password" v-model="password" required>
     </div>
     <div class="input-container">
-        <label style="color:#103ed4" for="password">Sucursal:</label>
-        <input type="password" id="sucursal" v-model="sucursal" required>
+        <label style="color:#103ed4" for="text">Sucursal:</label>
+        <input type="text" id="sucursal" v-model="sucursal" required>
     </div>
     <v-btn  block color="#ee451b" type="submit" @click="crearUsuario" >Registrar</v-btn>
     <div>
@@ -48,6 +48,7 @@
   
   <script>
     import API from '@/API.js';
+    import Swal from 'sweetalert2';
   export default {
     data() {
       return {
@@ -72,11 +73,31 @@
                     "sucursal": this.sucursal,
                     "idUsuario": numeroDeUsuarios + 1
                 })
-            console.log('Creando usuario...');
+                .then((response) => 
+                    {
+                    
+                    if (response.Respuesta == true){
+                        Swal.fire({
+                        icon: 'success',
+                        title: 'Registro Exitoso',    
+                        })
+                        console.log("Registro exitoso")
+                   
+
+                    }else{
+                       
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Error de Registro',
+                        text: 'Rut o Email ya está en uso'    
+                        })
+                        console.log("Error de registro")
+          }
+        })
         },
       login() {
         // Lógica de inicio de sesión
-        console.log('Iniciando sesión...');
+       // console.log('Iniciando sesión...');
       },
     }
   };

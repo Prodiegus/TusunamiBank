@@ -11,7 +11,12 @@ router.post('/addUsuario', async(req, res) => {
   const usuario = usuarioSchema(body)
   console.log("addUsuario",usuario)       
   await usuario.save().then((result) => {
-    res.json(result)
+    res.json(
+      {"Respuesta" : true
+
+      }
+
+    ) 
   })
   .catch((err) => {
     console.log(err)
