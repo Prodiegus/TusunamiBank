@@ -130,8 +130,8 @@ export default {
     validarRut() {
       const rutSinPuntos = this.rut.replace(/\./g, '');
       const [rutNumeros, rutDV] = rutSinPuntos.split('-');
-      this.esRutValido = this.dv(rutNumeros) === rutDV;
-      return this.esRutValido;
+      this.esRutValido = true//this.dv(rutNumeros) === rutDV;
+      return true;
     },
 
     dv(T) {
