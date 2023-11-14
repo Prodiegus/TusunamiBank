@@ -26,7 +26,7 @@ import imgUrl from '../../assets/pinera.png';
 
           <div class="fila">
             <div class="login-buttons">
-              <button class="login-button google-button"><i class="pi pi-google" style="color: white"></i>Iniciar Sesión con Google</button>
+              <button @click="iniciarSesionConGoogle" class="login-button google-button" ><i class="pi pi-google" style="color: white"></i>Iniciar Sesión con Google</button>
               <button class="login-button facebook-button"><i class="pi pi-facebook" style="color: white"></i>Iniciar Sesión con Facebook</button>
             </div>
           </div>
@@ -66,6 +66,7 @@ import imgUrl from '../../assets/pinera.png';
 <script>
     import API from '@/API.js';
     import Message from 'primevue/message';
+    import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
     export default{
         data () {
@@ -79,6 +80,7 @@ import imgUrl from '../../assets/pinera.png';
         }
     },
     methods: {
+
         validarFormato(vrut){
             const rutRegex = /^[0-9]+[-|‐]{1}[0-9kK]{1}$/;
             // Validar el formato
@@ -127,7 +129,19 @@ import imgUrl from '../../assets/pinera.png';
                 console.log(err)
             }); 
      
-        }
+        },
+        async iniciarSesionConGoogle() {
+          console.log('Iniciando sesión con Google...');
+          const auth = getAuth();
+          const provider = new GoogleAuthProvider();
+          try {
+              const result = await signInWithPopup(auth, provider);
+              const user = result.user;
+              console.log('Usuario autenticado con Google:', user);
+          } catch (error) {
+              console.error('Error de autenticación con Google:', error.message);
+          }
+      },
     }
 };
 </script>
