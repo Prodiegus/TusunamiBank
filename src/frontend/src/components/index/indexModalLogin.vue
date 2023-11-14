@@ -1,7 +1,45 @@
 <!--Contenido del formulario de login-->
 <!-- Debe contener la logica para redireccionar hacia home.vue si existe un login correcto-->
 
-<script setup>
+<script>
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+
+export default {
+  data() {
+    return {
+    rut: '',
+    MensajeError: ''
+    };
+  },
+  methods: {
+    validarFormato(){
+      const rutRegex = /^[0-9]+[-|‐]{1}[0-9kK]{1}$/;
+
+      // Validar el formato
+      if (rutRegex.test(this.rut)) {
+        console.log("valido")
+      } else {
+        this.MensajeError = "RUT invalido"
+        setTimeout(()=> {
+      // Ocultar el elemento después de 2 segundos
+      this.MensajeError = ""
+    }, 2000);
+      }
+    },
+    async iniciarSesionConGoogle() {
+      const auth = getAuth();
+      const provider = new GoogleAuthProvider();
+
+      try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        console.log('Usuario autenticado con Google:', user);
+      } catch (error) {
+        console.error('Error de autenticación con Google:', error.message);
+      }
+    },
+},
+};
 import Button from 'primevue/button';
 import imgUrl from '../../assets/pinera.png';
 </script>
@@ -24,27 +62,32 @@ import imgUrl from '../../assets/pinera.png';
             Inicia Sesión
           </div>
 
-          <div class="fila">
-            <div class="login-buttons">
-              <button class="login-button google-button"><i class="pi pi-google" style="color: white"></i>Iniciar Sesión con Google</button>
-              <button class="login-button facebook-button"><i class="pi pi-facebook" style="color: white"></i>Iniciar Sesión con Facebook</button>
+            <div class="fila">
+              <div class="login-buttons">
+                <button @click="iniciarSesionConGoogle" class="login-button google-button"><i class="pi pi-google" style="color: white"></i>Iniciar Sesión con Google</button>
+                <button class="login-button facebook-button"><i class="pi pi-facebook" style="color: white"></i>Iniciar Sesión con Facebook</button>
+              </div>
             </div>
-          </div>
 
-          <div class="fila"
-            style="text-align: center;color: #0f45ab; margin-top: 30px;font-weight: 800;font-size: 30px;">
-            -o-
-          </div>
-          <div class="fila">
-            <div class="input-container">
-              <label for="miCuadroDeTexto" style="color: #0f45ab;font-weight: 800;">RUT:</label>
-              <input type="text" id="rut" class="underline-input" name="rut">
+            <div class="fila"
+              style="text-align: center;color: #0f45ab; margin-top: 30px;font-weight: 800;font-size: 30px;">
+              -o-</div>
+            <div class="fila">
+              <div class="input-container">
+                <label for="miCuadroDeTexto" style="color: #0f45ab;font-weight: 800;">RUT:</label>
+                <input v-model="rut" type="text" id="miCuadroDeTexto" class="underline-input" name="miCuadroDeTexto">
+                <p id="mensajeError" style="color: red;">{{MensajeError}}</p>
+              </div>
             </div>
-          </div>
-          <div class="fila">
-            <div class="input-container">
-              <label for="password" style="color: #0f45ab;font-weight: 800;">Contraseña</label>
-              <input type="password" id="password" class="underline-input" name="password">
+            <div class="fila">
+              <div class="input-container">
+                <label for="miCuadroDeTexto" style="color: #0f45ab;font-weight: 800;">Contraseña</label>
+                <input type="text" id="miCuadroDeTexto" class="underline-input" name="miCuadroDeTexto">
+              </div>
+            </div>
+            <div class="fila"><button class="boton-iniciar-sesion" @click="validarFormato">Iniciar Sesión</button></div>
+            <div class="fila" style="color: #0f45ab;font-weight: 800;">
+              <p>¿No tienes una cuenta? <a href>Registrate</a></p>
             </div>
           </div>
           <div class="fila">
