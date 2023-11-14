@@ -1,27 +1,35 @@
 <script setup>
     import Button from 'primevue/button';
+
+    const cerrarSesion = () => {
+        this.$router.push('/');
+        console.log("Se cierra sesion");
+    };
+
 </script>
 
 <template>
     <div>
-      <div class="top-panel">
-            <div class="logo-container">
-                <img src="../icons/logo.png" class="icono">
+        <div class="top-panel">
+            <div class="logo">
+                <img src="../icons/logo.png" class="logo-icono">
                 <div class="text-container">
                     <p class="logo-text">Tusunami</p>
                     <p class="subtitle">"No lo vimos venir"</p>
                 </div>
-                <img src="../icons/estrella.png" class="small-icono">
+                <img src="../icons/estrella.png" class="star-icono">
             </div>
             <div class="spacer"></div>
-            <div class="button-container">
+            <div class="boton-container">
                 <Button class="boton" label="Sucursales" :ripple="false"/>
                 <div class="vertical-line"></div>
                 <p style="margin-right: 20px;">Hola, Sebastián Piñera</p>
                 <img src="../icons/choripan.jpg" class="rounded-icono">
-                <Button class="boton" label="Cerrar" :ripple="false"/>
+                <button class="boton-cerrar" @click="cerrarSesion">
+                    <img src="../icons/cerrar.png" alt="Cerrar" class="cerrar-icono">
+                </button>
             </div>
-      </div>
+        </div>
     </div>
 </template>
 
@@ -35,28 +43,16 @@
         position: relative;
     }
 
-    .logo-container {
+    .logo {
         display: flex;
         align-items: center;
         margin-left: 20px;
     }
 
-    .icono {
+    .logo-icono {
         width: 100px;
         height: 80px;
         margin-right: 10px;
-    }
-
-    .rounded-icono {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-    }
-
-    .small-icono {
-        width: 40px;
-        height: 40px;
-        margin-bottom: 35px;
     }
 
     .text-container {
@@ -75,12 +71,17 @@
         margin-left: 40px;
         margin-bottom: 10px;
     }
+    .star-icono {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 35px;
+    }
 
     .spacer {
         flex: 1;
     }
 
-    .button-container {
+    .boton-container {
         color: #ffffff;
         font-size: 18px;
         text-align: right;
@@ -101,6 +102,25 @@
         background-color: white;
         margin-left: 10px;
         margin-right: 20px;
+    }
+
+    .rounded-icono {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+    }
+
+    .boton-cerrar {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    .cerrar-icono {
+        width: 35px;
+        height: 35px;
+        margin-left: 20px;
     }
 
 </style>
