@@ -1,6 +1,7 @@
 <!--Contenido del formulario de login-->
 <!-- Debe contener la logica para redireccionar hacia home.vue si existe un login correcto-->
 
+<<<<<<< Updated upstream
 <script>
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
@@ -43,6 +44,8 @@ export default {
 import Button from 'primevue/button';
 import imgUrl from '../../assets/pinera.png';
 </script>
+=======
+>>>>>>> Stashed changes
 
 <template>
   <div style="background-color: #d9d9d9;">
@@ -103,7 +106,14 @@ import imgUrl from '../../assets/pinera.png';
 </template>
 
 <script>
+<<<<<<< Updated upstream
     import API from '@/api';
+=======
+    import Button from 'primevue/button';
+    import imgUrl from '../../assets/pinera.png';
+    import API from '@/API.js';
+    import Message from 'primevue/message';
+>>>>>>> Stashed changes
 
     export default{
         data () {
@@ -127,7 +137,18 @@ import imgUrl from '../../assets/pinera.png';
                 "password": password
             })
             .then((result) => {
+<<<<<<< Updated upstream
                 console.log(result.resplogin)
+=======
+                if(rut != "" && password != ""){
+                    this.successMessage();
+                    this.$router.push('/home');
+                    console.log(result.resplogin)
+                }else{
+                    this.failedMessage();
+                    console.log(result.resplogin)
+                }	
+>>>>>>> Stashed changes
             })
             .catch((err) => {
                 console.log(err)
