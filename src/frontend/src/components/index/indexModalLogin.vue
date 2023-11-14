@@ -1,78 +1,147 @@
 <!--Contenido del formulario de login-->
 <!-- Debe contener la logica para redireccionar hacia home.vue si existe un login correcto-->
 
-<script setup>
-import Button from 'primevue/button';
-import imgUrl from '../../assets/pinera.png';
-</script>
-
 <template>
   <div style="background-color: #d9d9d9;">
-    <!DOCTYPE html>
-    <html lang="es">
-
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Login</title>
-
-    </head>
-
-    <body>
-
-      <div class="contenedor">
-        <div class="columna1">
-          <div class="fila" style="color: red; text-align: center; font-weight:800; font-size: 40px ;">Bancos <br>Tusunami
-          </div>
-          <div>
-            <img src="../../assets/pinera.png" alt="Logo" style="width: 100%;height: 100%;margin-top: 20px;">
-          </div>
+    <div class="contenedor">
+      <div class="columna1">
+        <div class="fila" style="color: red; text-align: center; font-weight:800; font-size: 40px ;">Bancos <br>Tusunami
         </div>
-
-        <div class="columna2">
-
-          <div style="height: 70vh;background-color: white;border-radius: 30px;">
-            <div class="fila"
-              style="text-align: center;color:#0f45ab; margin-top: 30px;font-weight: 800;font-size: 30px;">
-              Inicia Sesión</div>
-
-            <div class="fila">
-              <div class="login-buttons">
-                <button class="login-button google-button"><i class="pi pi-google" style="color: white"></i>Iniciar Sesión con Google</button>
-                <button class="login-button facebook-button"><i class="pi pi-facebook" style="color: white"></i>Iniciar Sesión con Facebook</button>
-              </div>
-            </div>
-
-            <div class="fila"
-              style="text-align: center;color: #0f45ab; margin-top: 30px;font-weight: 800;font-size: 30px;">
-              -o-</div>
-            <div class="fila">
-              <div class="input-container">
-                <label for="miCuadroDeTexto" style="color: #0f45ab;font-weight: 800;">RUT:</label>
-                <input type="text" id="miCuadroDeTexto" class="underline-input" name="miCuadroDeTexto">
-              </div>
-            </div>
-            <div class="fila">
-              <div class="input-container">
-                <label for="miCuadroDeTexto" style="color: #0f45ab;font-weight: 800;">Contraseña</label>
-                <input type="text" id="miCuadroDeTexto" class="underline-input" name="miCuadroDeTexto">
-              </div>
-            </div>
-            <div class="fila"><button class="boton-iniciar-sesion">Iniciar Sesión</button></div>
-            <div class="fila" style="color: #0f45ab;font-weight: 800;">
-              <p>¿No tienes una cuenta? <a href>Registrate</a></p>
-            </div>
-          </div>
-       
+        <div>
+          <img src="../../assets/pinera.png" alt="Logo" style="width: 100%;height: 100%;margin-top: 20px;">
         </div>
-      
       </div>
- 
-    </body>
 
-    </html>
+      <div class="columna2">
+        <div style="height: 80vh;background-color: white;border-radius: 30px;">
+          <div class="fila"
+            style="text-align: center;color:#0f45ab; margin-top: 30px;font-weight: 800;font-size: 30px;">
+            Inicia Sesión
+          </div>
+
+          <div class="fila">
+            <div class="login-buttons">
+              <button @click="iniciarSesionConGoogle" class="login-button google-button" ><i class="pi pi-google" style="color: white"></i>Iniciar Sesión con Google</button>
+              <button class="login-button facebook-button"><i class="pi pi-facebook" style="color: white"></i>Iniciar Sesión con Facebook</button>
+            </div>
+          </div>
+
+          <div class="fila"
+            style="text-align: center;color: #0f45ab; margin-top: 30px;font-weight: 800;font-size: 30px;">
+            -o-
+          </div>
+          <div class="fila">
+            <div class="input-container">
+              <label for="miCuadroDeTexto" style="color: #0f45ab;font-weight: 800;">RUT:</label>
+              <input type="text" id="rut" class="underline-input" name="rut">
+              <p id="mensajeDeError" style="color: red;">{{mensajeDeError}}</p>
+            </div>
+          </div>
+          <div class="fila">
+            <div class="input-container">
+              <label for="password" style="color: #0f45ab;font-weight: 800;">Contraseña</label>
+              <input type="password" id="password" class="underline-input" name="password">
+            </div>
+          </div>
+          <div class="fila">
+            <button class="boton-iniciar-sesion" @click="login">Iniciar Sesión</button>
+          </div>
+          <div class="fila" style="color: #0f45ab;font-weight: 800;">
+            <p>¿No tienes una cuenta? <a href="#">Registrate</a></p>
+            <transition-group name="p-message" tag="div">
+              <Message v-for="msg of mensajes" :key="msg.id" :severity="msg.severity">{{ msg.content }}</Message>
+            </transition-group>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
+
+<script>
+    import Button from 'primevue/button';
+    import imgUrl from '../../assets/pinera.png';
+    import API from '@/API.js';
+    import Message from 'primevue/message';
+    import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+
+    export default{
+        data () {
+        return {
+            rut: '',
+            password: '',
+            flagInicioSesion: true,
+            mensajes: [],
+            count: 0,
+            mensajeDeError: ''
+        }
+    },
+    methods: {
+
+        validarFormato(vrut){
+            const rutRegex = /^[0-9]+[-|‐]{1}[0-9kK]{1}$/;
+            // Validar el formato
+            if (rutRegex.test(vrut)) {
+              console.log("valido")
+              return true;
+            } else {
+              console.log("invalido")
+              this.mensajeDeError = "RUT invalido"
+              setTimeout(()=> {
+            // Ocultar el elemento después de 2 segundos
+              this.mensajeDeError = ""
+              }, 2000);
+              return false;
+            }
+        },
+        successMessage() {
+            this.mensajes.push({ severity: 'success', content: 'Inicio de sesión exitoso, redirigiendo...', id: this.count++ });
+        },
+        failedMessage() {
+            this.mensajes.push({ severity: 'error', content: 'Inicio de sesión fallido', id: this.count++ });
+        },
+        async funcion(){
+          const texto1=document.getElementById("rut").value;
+          const texto2=document.getElementById("password").value;
+          console.log("rut:"+texto1);
+          console.log("contraseña:"+texto2);
+        },
+        async login() {
+            const rut=document.getElementById("rut").value;
+            const password=document.getElementById("password").value;
+            await API.logusuario({
+                "rut": rut,
+                "password": password
+            })
+            .then((result) => {
+                if(rut != "" && password != "" && this.validarFormato(rut) && result.resplogin){
+                  this.successMessage();
+                  this.$router.push('/home');
+                }else{
+                    this.failedMessage();
+                    console.log(result.resplogin)
+                }	
+            })
+            .catch((err) => {
+                console.log(err)
+            }); 
+     
+        },
+        async iniciarSesionConGoogle() {
+          console.log('Iniciando sesión con Google...');
+          const auth = getAuth();
+          const provider = new GoogleAuthProvider();
+          try {
+              const result = await signInWithPopup(auth, provider);
+              const user = result.user;
+              console.log('Usuario autenticado con Google:', user);
+          } catch (error) {
+              console.error('Error de autenticación con Google:', error.message);
+          }
+      },
+    }
+};
+</script>
 
 <style >
 body {

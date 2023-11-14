@@ -1,0 +1,55 @@
+﻿Pruebas rut:
+* El rut tiene formato esperado (xxxxxxxx-x):respuesta esperada: feedback de rut correcto
+* El rut está almacenado en base de datos:respuesta esperada: feedback de rut correcto
+* El rut esta vacio: respuesta esperada: feedback de mensaje de alerta
+* El rut no está almacenado en base de datos: respuesta esperada: feedback de mensaje de alerta
+* El rut esta con formato erróneo: respuesta esperada: feedback de mensaje de alerta
+* El rut es falso: respuesta esperada: feedback de mensaje de alerta
+
+
+
+
+Pruebas contraseña:
+* La contraseña contiene 8 o más caracteres y menos de 16 caracteres, 1 o mas mayúsculas y 1 o más números: respuesta esperada: feedback de contraseña válida
+* La contraseña no contiene 8 o más caracteres y menos de 16 caracteres, no contiene mayúsculas y 1 o más números: feedback de contraseña inválida
+* La contraseña contiene 8 o más caracteres y menos de 16 caracteres, no contiene mayúsculas y 1 o más números: feedback de contraseña inválida
+* La contraseña contiene 8 o más caracteres y menos de 16 caracteres, 1 o mas mayúsculas y 0 números: respuesta esperada: feedback de contraseña inválida
+
+
+
+
+Pruebas rut y contraseña:
+
+
+* Utiliza un RUT y una contraseña válidos para verificar que el sistema permite el acceso correctamente: respuesta esperada: feedback de login válido
+* Ingresa un RUT válido pero una contraseña inválida: respuesta esperada: feedback de login invalido.
+* Intenta ingresar caracteres especiales en el campo del RUT y la contraseña para verificar la seguridad del sistema: respuesta esperada: feedback de caracteres inválidos.
+
+
+
+
+Pruebas inicio de sesión:
+* Se presiona el botón con las credenciales en blanco: respuesta esperada: feedback de mensaje de alerta
+* se presiona el botón con rut pero sin contraseña: respuesta esperada: feedback de mensaje de alerta
+* se presiona el botón con contraseña pero sin rut: respuesta esperada: feedback de mensaje de alerta
+* se presiona el botón con contraseña y rut válidos: respuesta esperada: feedback de login valido, redireccionamiento a home
+* se presiona botón con credenciales puestas pero rut invalido: respuesta esperada: feedback de mensaje de alerta
+* se presiona botón con credenciales puestas pero contraseña invalido: respuesta esperada: feedback de mensaje de alerta
+
+
+
+
+
+
+
+
+Pruebas de botón de inicio de sesión con google:
+* al presionarlo redirecciona a gmail:  respuesta esperada: redireccionamiento
+* al presionarlo no redirecciona a gmail: respuesta esperada: no hay respuesta
+
+
+
+
+Pruebas de boton inicio de sesión con facebook:
+* al presionarlo redirecciona a facebook:  respuesta esperada: redireccionamiento
+* al presionarlo no redirecciona a facebook: respuesta esperada: no hay respuesta
