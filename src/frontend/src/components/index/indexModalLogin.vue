@@ -39,6 +39,7 @@ import imgUrl from '../../assets/pinera.png';
             <div class="input-container">
               <label for="miCuadroDeTexto" style="color: #0f45ab;font-weight: 800;">RUT:</label>
               <input type="text" id="rut" class="underline-input" name="rut">
+              <p id="mensajeDeError" style="color: red;">{{mensajeDeError}}</p>
             </div>
           </div>
           <div class="fila">
@@ -53,7 +54,7 @@ import imgUrl from '../../assets/pinera.png';
           <div class="fila" style="color: #0f45ab;font-weight: 800;">
             <p>¿No tienes una cuenta? <a href="#">Registrate</a></p>
             <transition-group name="p-message" tag="div">
-              <Message v-for="msg of messages" :key="msg.id" :severity="msg.severity">{{ msg.content }}</Message>
+              <Message v-for="msg of mensajes" :key="msg.id" :severity="msg.severity">{{ msg.content }}</Message>
             </transition-group>
           </div>
         </div>
@@ -72,16 +73,33 @@ import imgUrl from '../../assets/pinera.png';
             rut: '',
             password: '',
             flagInicioSesion: true,
-            messages: [],
-            count: 0
+            mensajes: [],
+            count: 0,
+            mensajeDeError: ''
         }
     },
     methods: {
+        validarFormato(vrut){
+            const rutRegex = /^[0-9]+[-|‐]{1}[0-9kK]{1}$/;
+            // Validar el formato
+            if (rutRegex.test(vrut)) {
+              console.log("valido")
+              return true;
+            } else {
+              console.log("invalido")
+              this.mensajeDeError = "RUT invalido"
+              setTimeout(()=> {
+            // Ocultar el elemento después de 2 segundos
+              this.mensajeDeError = ""
+              }, 2000);
+              return false;
+            }
+        },
         successMessage() {
-            this.messages.push({ severity: 'success', content: 'Inicio de sesión exitoso, redirigiendo...', id: this.count++ });
+            this.mensajes.push({ severity: 'success', content: 'Inicio de sesión exitoso, redirigiendo...', id: this.count++ });
         },
         failedMessage() {
-            this.messages.push({ severity: 'error', content: 'Inicio de sesión fallido', id: this.count++ });
+            this.mensajes.push({ severity: 'error', content: 'Inicio de sesión fallido', id: this.count++ });
         },
         async funcion(){
           const texto1=document.getElementById("rut").value;
@@ -98,9 +116,9 @@ import imgUrl from '../../assets/pinera.png';
                 "password": password
             })
             .then((result) => {
-                if(rut != "" && password != ""){
-                    this.successMessage();
-                    this.$router.push('/home');
+                if(rut != "" && password != "" && this.validarFormato(rut) && result.resplogin){
+                  this.successMessage();
+                  this.$router.push('/home');
                 }else{
                     this.failedMessage();
                 }	
