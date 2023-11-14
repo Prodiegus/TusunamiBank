@@ -22,7 +22,7 @@ onMounted(() => {
   //addUsuario();
 });
 
-const newAccount = true; // Placeholder para implementar lo del localstorage despues
+const newAccount = false; // Placeholder para implementar lo del localstorage despues
 
 </script>
 
