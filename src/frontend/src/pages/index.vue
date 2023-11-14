@@ -1,3 +1,4 @@
+
 <!-- Esta pagina es el landing page-->
 <!-- Permite que un nuevo usuario vea los tipos de cuenta y/o ofertas del banco-->
 <!-- Otorga al usuario la opcion de redirección a registro (en este mismo componente) o login
