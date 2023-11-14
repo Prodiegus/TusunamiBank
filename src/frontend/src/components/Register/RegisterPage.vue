@@ -16,25 +16,27 @@
     <form @submit.prevent="login">
     <div class="input-container">
         <label style="color:#103ed4" for="username">Nombre Completo:</label>
-        <input type="text" id="username" v-model="completeName" required>
+        <input type="text" id="username" :maxlength="50" :counter="50" @keypress="soloLetras" v-model="completeName" required>
     </div>
     <div class="input-container">
         <label style="color:#103ed4" for="rut">Rut:</label>
-        <input type="text" id="rut" v-model="rut" required>
+        <input type="text" id="rut" :maxlength="10" :counter="10" v-model="rut" required>
     </div>
     <div class="input-container">
         <label style="color:#103ed4" for="text">Correo electrónico:</label>
-        <input type="text" id="correo electronico" v-model="email" required>
+        <input @input="validarEmail" type="text" id="correo electronico" :maxlength="50" :counter="50" v-model="email" required>
+        <p v-if="esValido"></p>
+        <p v-else style="color: black">El correo electrónico debe contener al menos un "@".</p>
     </div>
     <div class="input-container">
         <label style="color:#103ed4" for="password">Contraseña:</label>
-        <input type="password" id="password" v-model="password" required>
+        <input type="password" id="password" :maxlength="50" :counter="50" v-model="password" required>
     </div>
     <div class="input-container">
         <label style="color:#103ed4" for="text">Sucursal:</label>
         <input type="text" id="sucursal" v-model="sucursal" required>
     </div>
-    <v-btn  block color="#ee451b" type="submit" @click="crearUsuario" >Registrar</v-btn>
+    <v-btn block :color="esValido ? '#ee451b' : 'grey'" type="submit" @click="crearUsuario" :disabled="!(esValido && completeName.length > 0 && password.length > 0 && rut.length==10 ) ">Registrar</v-btn>
     <div>
         <h3 style="color:#103ed4">¿Ya tienes cuenta? 
         <router-link to="login">Iniciar Sesión</router-link> 
@@ -49,6 +51,7 @@
   <script>
     import API from '@/API.js';
     import Swal from 'sweetalert2';
+    
   export default {
     data() {
       return {
@@ -57,6 +60,7 @@
         email: '',
         password: '',
         sucursal: '',
+        esValido: false
       };
     },
     methods: {
@@ -95,6 +99,19 @@
           }
         })
         },
+        validarEmail() {
+        this.esValido = this.email.includes('@');
+        },
+        validarRUT() {
+      
+      // Establecer this.esRUTValido en true si es válido, de lo contrario, en false.
+        },
+    soloLetras(event) {
+      const pattern = /^[a-zA-Z\s]+$/; // Permitir solo letras y espacios
+      if (!pattern.test(event.key)) {
+        event.preventDefault();
+      }
+    },
       login() {
         // Lógica de inicio de sesión
        // console.log('Iniciando sesión...');
