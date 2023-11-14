@@ -4,7 +4,7 @@
 
 
 <template>
-  <div style="background-color: #d9d9d9;">
+  <div >
     <div class="contenedor">
       <div class="columna1">
         <div class="fila" style="color: red; text-align: center; font-weight:800; font-size: 40px ;">Bancos <br>Tusunami
@@ -159,14 +159,14 @@ body {
 
 .columna1 {
   flex: 1;
-
+  background-color: #d9d9d9;
   padding: 20px;
 }
 
 .columna2 {
 
   flex: 1;
-
+  background-color: #d9d9d9;
   padding: 20px;
 }
 

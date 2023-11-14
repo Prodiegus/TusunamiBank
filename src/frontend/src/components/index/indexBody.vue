@@ -5,8 +5,7 @@ import indexRegistro from './indexRegistro.vue';
 
 <template>
     <div>
-        <h1>Aqui va el contenido del landing page</h1>
+        <v-img style="height: 550px;" cover src="../../../public/pineraycia.png"></v-img>
         <indexRegistro></indexRegistro>
     </div>
-
 </template>
