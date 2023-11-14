@@ -34,8 +34,11 @@
 </template>
 
 <style scoped>
+    @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300&display=swap');
+
     .top-panel {
         background-color: #0039A6;
+        font-family: 'Libre Franklin', sans-serif;
         height: 100%;
         width: 100%;
         align-items: left;
@@ -92,8 +95,10 @@
 
     .boton {
         color: #ffffff;
+        font-size: 18px;
         background-color: transparent;
         border-color: transparent;
+        margin-top: 18px;
     }
 
     .vertical-line {
