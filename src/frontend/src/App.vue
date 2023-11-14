@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/valid-v-else -->
 <!-- Root de la app-->
 <!-- Aqui debería estar la lectura de permanencia de datos en el localstorage-->
 <!-- Si no existe datos en localstorage, es porque es un usuario nuevo o se deslogueó 
@@ -27,8 +28,9 @@ const newAccount = true; // Placeholder para implementar lo del localstorage des
 
 <template>
   <div>
-    <index v-if="newAccount"></index>
-    <home v-else></home>
+<!--     <index v-if="newAccount"></index>
+    <home v-else></home> -->
+    <router-view/>
   </div>
 </template>
 

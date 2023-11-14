@@ -7,14 +7,7 @@ export default class API {
     //LLAMADAS USUARIO
     static async addUsuario(data) {
         try {
-            const res = await axios.post(url + "addUsuario", {
-                "nombre": "Omar",
-                "correo": "omairizi@correo.cl",
-                "contrasena": "trollo",
-                "direccion": "por ahi"
-            })
-
-            console.log(res.data);
+            const res = await axios.post(url + "addUsuario", data)
             return res.data
         } catch (error) {
             return error.response.data
@@ -34,4 +27,22 @@ export default class API {
         }
     }
 
+    static async getNumeroUsuarios() {
+        try {
+            const res = await axios.get(url + "getNumeroUsuarios")
+            return res.data
+        } catch (error) {
+            return error.response.data
+        }
+    }
+
+
+    static async verificarUsuarioPorSucursal(sucursal, rut) {
+        try {
+            const res = await axios.get(`${url}verificarUsuarioPorSucursal/${sucursal}/${rut}`);
+            return res.data;
+        } catch (error) {
+            return error.response.data;
+        }
+    }
 }

@@ -1,5 +1,7 @@
 <!--Contenido del formulario de login-->
 <!-- Debe contener la logica para redireccionar hacia home.vue si existe un login correcto-->
+<script>
+};
 
 <template>
   <div style="background-color: #d9d9d9;">
