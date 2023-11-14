@@ -43,28 +43,35 @@
 </template>
 
 <style>
-.boton{
-    color:#ffffff;
-    background-color: transparent;
-    border-color: transparent;
-}
 
-.contenedor{
-    background-color: #D52B1E;
-    height: 100%;
-    width: 100%;
-}
-.icono{
-    width: 75px;
-    height: 75px;
-}
-.primaldiv{
-    width: 100%; 
-    display: flex; 
-    align-items: left;   
-}
-.linea{
-    width: 100%;
-    margin-bottom: 5%;
-}
+    .boton{
+        color:#ffffff;
+        background-color: transparent;
+        border-color: transparent;
+        font-size: 18px;
+        margin-bottom: 20px;
+        margin-left: 10px;
+    }
+
+    .contenedor{
+        background-color: #D52B1E;
+        height: 100%;
+        width: 100%;
+    }
+    .icono{
+        width: 75px;
+        height: 75px;
+        margin-left: 10px;
+        margin-top: 4px;
+        border-radius: 50%;
+    }
+    .primaldiv{
+        width: 100%; 
+        display: flex; 
+        align-items: left;   
+    }
+    .linea{
+        width: 100%;
+        margin-bottom: 1%;
+    }
 </style>
