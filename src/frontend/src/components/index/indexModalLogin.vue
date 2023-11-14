@@ -10,8 +10,6 @@ export default {
 <template>
     <div>
         <h1>Aqui va el contenido del modal de inicio de sesión</h1>
-        <router-link to="/RegisterPage">Registrarse</router-link>
          
-
     </div>
 </template>
