@@ -95,9 +95,6 @@ import imgUrl from '../../assets/pinera.png';
           </div>
           <div class="fila" style="color: #0f45ab;font-weight: 800;">
             <p>¿No tienes una cuenta? <a href="#">Registrate</a></p>
-            <transition-group name="p-message" tag="div">
-              <Message v-for="msg of messages" :key="msg.id" :severity="msg.severity">{{ msg.content }}</Message>
-            </transition-group>
           </div>
         </div>
       </div>
@@ -106,26 +103,16 @@ import imgUrl from '../../assets/pinera.png';
 </template>
 
 <script>
-    import API from '@/API.js';
-    import Message from 'primevue/message';
+    import API from '@/api';
 
     export default{
         data () {
         return {
             rut: '',
             password: '',
-            flagInicioSesion: true,
-            messages: [],
-            count: 0
         }
     },
     methods: {
-        successMessage() {
-            this.messages.push({ severity: 'success', content: 'Inicio de sesión exitoso, redirigiendo...', id: this.count++ });
-        },
-        failedMessage() {
-            this.messages.push({ severity: 'error', content: 'Inicio de sesión fallido', id: this.count++ });
-        },
         async funcion(){
           const texto1=document.getElementById("rut").value;
           const texto2=document.getElementById("password").value;
@@ -135,18 +122,12 @@ import imgUrl from '../../assets/pinera.png';
         async login() {
             const rut=document.getElementById("rut").value;
             const password=document.getElementById("password").value;
-            
             await API.logusuario({
                 "rut": rut,
                 "password": password
             })
             .then((result) => {
-                if(rut != "" && password != ""){
-                    this.successMessage();
-                    this.$router.push('/home');
-                }else{
-                    this.failedMessage();
-                }	
+                console.log(result.resplogin)
             })
             .catch((err) => {
                 console.log(err)
