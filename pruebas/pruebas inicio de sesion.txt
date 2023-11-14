@@ -1,5 +1,5 @@
 ﻿Pruebas rut:
-* El rut tiene formato esperado (xx.xxx.xxx-x):respuesta esperada: feedback de rut correcto
+* El rut tiene formato esperado (xxxxxxxx-x):respuesta esperada: feedback de rut correcto
 * El rut está almacenado en base de datos:respuesta esperada: feedback de rut correcto
 * El rut esta vacio: respuesta esperada: feedback de mensaje de alerta
 * El rut no está almacenado en base de datos: respuesta esperada: feedback de mensaje de alerta
