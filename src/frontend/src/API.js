@@ -23,4 +23,13 @@ export default class API {
         }
     }
 
+
+    static async verificarUsuarioPorSucursal(sucursal, rut) {
+        try {
+            const res = await axios.get(`${url}verificarUsuarioPorSucursal/${sucursal}/${rut}`);
+            return res.data;
+        } catch (error) {
+            return error.response.data;
+        }
+    }
 }
