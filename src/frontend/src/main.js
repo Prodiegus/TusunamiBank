@@ -4,7 +4,6 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 import { initializeApp } from 'firebase/app';
-
 // Para cambiar el tema de PrimeVue, elegir otro import de: https://primevue.org/theming/
 import 'primevue/resources/themes/lara-light-blue/theme.css'
 
@@ -18,6 +17,7 @@ import ToastService from 'primevue/toastservice';
 
 // importación de rutas
 import router from './router';
+
 const firebaseConfig = {
     apiKey: "AIzaSyAjfnH5xIIyv1l_MX23WQ7kUeeUVMq3cg0",
     authDomain: "hola-5d173.firebaseapp.com",
