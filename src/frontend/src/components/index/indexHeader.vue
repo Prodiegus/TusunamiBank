@@ -3,7 +3,6 @@
 <script setup>
 import indexModalLogin from './indexModalLogin.vue';
 import Dialog from 'primevue/dialog';
-import Button from 'primevue/button';
 import { ref } from "vue";
 
 const visible = ref(false);
@@ -11,14 +10,21 @@ const visible = ref(false);
 </script>
 
 <template>
-    <div>
-        <Button label="Show" icon="pi pi-external-link" @click="visible = true" />
-
-        <Dialog v-model:visible="visible" modal :style="{ width: '100rem',height: '100rem' } "
+    <v-container>
+        <v-row justify-end style="background-color: white;">
+            <v-btn
+                placeholder="Iniciar Sesión"
+                icon="pi pi-external-link"
+                @click="visible = true"
+                style="background-color: orange;"
+            />
+            <Dialog
+                v-model:visible="visible"
+                modal
+                :style="{ width: '100rem', height: '100rem', backgroundColor: 'white' }"
             >
-            <indexModalLogin></indexModalLogin>
-        </Dialog>
-
-    <h1>Aqui va el contenido del Header del landing page</h1>
-    
-</div></template>
+                <indexModalLogin />
+            </Dialog>
+        </v-row>
+    </v-container>
+</template>

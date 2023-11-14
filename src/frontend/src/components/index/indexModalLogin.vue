@@ -16,27 +16,27 @@
 
       <div class="columna2">
         <div style="height: 80vh;background-color: white;border-radius: 30px;">
-          <div class="fila"
-            style="text-align: center;color:#0f45ab; margin-top: 30px;font-weight: 800;font-size: 30px;">
+          <div class="fila" style="text-align: center;color:#0f45ab; margin-top: 30px;font-weight: 800;font-size: 30px;">
             Inicia Sesión
           </div>
 
           <div class="fila">
             <div class="login-buttons">
-              <button @click="iniciarSesionConGoogle" class="login-button google-button" ><i class="pi pi-google" style="color: white"></i>Iniciar Sesión con Google</button>
-              <button class="login-button facebook-button"><i class="pi pi-facebook" style="color: white"></i>Iniciar Sesión con Facebook</button>
+              <button @click="iniciarSesionConGoogle" class="login-button google-button"><i class="pi pi-google"
+                  style="color: white"></i>Iniciar Sesión con Google</button>
+              <button class="login-button facebook-button"><i class="pi pi-facebook" style="color: white"></i>Iniciar
+                Sesión con Facebook</button>
             </div>
           </div>
 
-          <div class="fila"
-            style="text-align: center;color: #0f45ab; margin-top: 30px;font-weight: 800;font-size: 30px;">
+          <div class="fila" style="text-align: center;color: #0f45ab; margin-top: 30px;font-weight: 800;font-size: 30px;">
             -o-
           </div>
           <div class="fila">
             <div class="input-container">
               <label for="miCuadroDeTexto" style="color: #0f45ab;font-weight: 800;">RUT:</label>
               <input type="text" id="rut" class="underline-input" name="rut">
-              <p id="mensajeDeError" style="color: red;">{{mensajeDeError}}</p>
+              <p id="mensajeDeError" style="color: red;">{{ mensajeDeError }}</p>
             </div>
           </div>
           <div class="fila">
@@ -61,87 +61,87 @@
 </template>
 
 <script>
-    import Button from 'primevue/button';
-    import imgUrl from '../../assets/pinera.png';
-    import API from '@/API.js';
-    import Message from 'primevue/message';
-    import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import Button from 'primevue/button';
+import imgUrl from '../../assets/pinera.png';
+import API from '@/API.js';
+import Message from 'primevue/message';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
-    export default{
-        data () {
-        return {
-            rut: '',
-            password: '',
-            flagInicioSesion: true,
-            mensajes: [],
-            count: 0,
-            mensajeDeError: ''
-        }
-    },
-    methods: {
-
-        validarFormato(vrut){
-            const rutRegex = /^[0-9]+[-|‐]{1}[0-9kK]{1}$/;
-            // Validar el formato
-            if (rutRegex.test(vrut)) {
-              console.log("valido")
-              return true;
-            } else {
-              console.log("invalido")
-              this.mensajeDeError = "RUT invalido"
-              setTimeout(()=> {
-            // Ocultar el elemento después de 2 segundos
-              this.mensajeDeError = ""
-              }, 2000);
-              return false;
-            }
-        },
-        successMessage() {
-            this.mensajes.push({ severity: 'success', content: 'Inicio de sesión exitoso, redirigiendo...', id: this.count++ });
-        },
-        failedMessage() {
-            this.mensajes.push({ severity: 'error', content: 'Inicio de sesión fallido', id: this.count++ });
-        },
-        async funcion(){
-          const texto1=document.getElementById("rut").value;
-          const texto2=document.getElementById("password").value;
-          console.log("rut:"+texto1);
-          console.log("contraseña:"+texto2);
-        },
-        async login() {
-            const rut=document.getElementById("rut").value;
-            const password=document.getElementById("password").value;
-            await API.logusuario({
-                "rut": rut,
-                "password": password
-            })
-            .then((result) => {
-                if(rut != "" && password != "" && this.validarFormato(rut) && result.resplogin){
-                  this.successMessage();
-                  this.$router.push('/home');
-                }else{
-                    this.failedMessage();
-                    console.log(result.resplogin)
-                }	
-            })
-            .catch((err) => {
-                console.log(err)
-            }); 
-     
-        },
-        async iniciarSesionConGoogle() {
-          console.log('Iniciando sesión con Google...');
-          const auth = getAuth();
-          const provider = new GoogleAuthProvider();
-          try {
-              const result = await signInWithPopup(auth, provider);
-              const user = result.user;
-              console.log('Usuario autenticado con Google:', user);
-          } catch (error) {
-              console.error('Error de autenticación con Google:', error.message);
-          }
-      },
+export default {
+  data() {
+    return {
+      rut: '',
+      password: '',
+      flagInicioSesion: true,
+      mensajes: [],
+      count: 0,
+      mensajeDeError: ''
     }
+  },
+  methods: {
+
+    validarFormato(vrut) {
+      const rutRegex = /^[0-9]+[-|‐]{1}[0-9kK]{1}$/;
+      // Validar el formato
+      if (rutRegex.test(vrut)) {
+        console.log("valido")
+        return true;
+      } else {
+        console.log("invalido")
+        this.mensajeDeError = "RUT invalido"
+        setTimeout(() => {
+          // Ocultar el elemento después de 2 segundos
+          this.mensajeDeError = ""
+        }, 2000);
+        return false;
+      }
+    },
+    successMessage() {
+      this.mensajes.push({ severity: 'success', content: 'Inicio de sesión exitoso, redirigiendo...', id: this.count++ });
+    },
+    failedMessage() {
+      this.mensajes.push({ severity: 'error', content: 'Inicio de sesión fallido', id: this.count++ });
+    },
+    async funcion() {
+      const texto1 = document.getElementById("rut").value;
+      const texto2 = document.getElementById("password").value;
+      console.log("rut:" + texto1);
+      console.log("contraseña:" + texto2);
+    },
+    async login() {
+      const rut = document.getElementById("rut").value;
+      const password = document.getElementById("password").value;
+      await API.logusuario({
+        "rut": rut,
+        "password": password
+      })
+        .then((result) => {
+          if (rut != "" && password != "" && this.validarFormato(rut) && result.resplogin) {
+            this.successMessage();
+            this.$router.push('/home');
+          } else {
+            this.failedMessage();
+            console.log(result.resplogin)
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        });
+
+    },
+    async iniciarSesionConGoogle() {
+      console.log('Iniciando sesión con Google...');
+      const auth = getAuth();
+      const provider = new GoogleAuthProvider();
+      try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        console.log('Usuario autenticado con Google:', user);
+      } catch (error) {
+        console.error('Error de autenticación con Google:', error.message);
+      }
+    },
+  }
 };
 </script>
 
@@ -211,26 +211,25 @@ body {
 
 
 
-    .login-buttons {
-      text-align: center;
-    }
+.login-buttons {
+  text-align: center;
+}
 
-    .login-button {
-      display: inline-block;
-      padding: 10px 20px;
-      font-size: 16px;
-      margin: 5px;
-      cursor: pointer;
-    }
+.login-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 5px;
+  cursor: pointer;
+}
 
-    .google-button {
-      background-color: #4285F4;
-      color: #ffffff;
-    }
+.google-button {
+  background-color: #4285F4;
+  color: #ffffff;
+}
 
-    .facebook-button {
-      background-color: #3b5998;
-      color: #ffffff;
-    }
-
+.facebook-button {
+  background-color: #3b5998;
+  color: #ffffff;
+}
 </style>

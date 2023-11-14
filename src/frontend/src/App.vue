@@ -27,11 +27,10 @@ const newAccount = true; // Placeholder para implementar lo del localstorage des
 </script>
 
 <template>
-  <div>
-<!--     <index v-if="newAccount"></index>
-    <home v-else></home> -->
-    <router-view/>
-  </div>
+  <v-app>
+    <index v-if="newAccount"></index>
+    <home v-else></home> 
+  </v-app>
 </template>
 
 <style scoped>
