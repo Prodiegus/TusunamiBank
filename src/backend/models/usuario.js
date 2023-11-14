@@ -5,8 +5,12 @@ const usuarioSchema = new Schema({
     apellidoPaterno: String,
     apellidoMaterno: String,
     nombres: String,
-    rut: String,
-    password: String
+    rut: { type: String, unique: true, required: true },
+    email: { type: String, unique: true, required: true, lowercase: true },
+    password: String,
+    idUsuario: Number,
+    createdAt: { type: Date, default: Date.now },
+    sucursal: String,
 },{ versionKey: false }
 );
 

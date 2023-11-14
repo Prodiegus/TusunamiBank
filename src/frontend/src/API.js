@@ -7,14 +7,16 @@ export default class API {
     //LLAMADAS USUARIO
     static async addUsuario(data) {
         try {
-            const res = await axios.post(url + "addUsuario", {
-                "nombre": "Omar",
-                "correo": "omairizi@correo.cl",
-                "contrasena": "trollo",
-                "direccion": "por ahi"
-            })
+            const res = await axios.post(url + "addUsuario", data)
+            return res.data
+        } catch (error) {
+            return error.response.data
+        }
+    }
 
-            console.log(res.data);
+    static async getNumeroUsuarios() {
+        try {
+            const res = await axios.get(url + "getNumeroUsuarios")
             return res.data
         } catch (error) {
             return error.response.data

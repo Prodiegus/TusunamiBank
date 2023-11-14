@@ -1,10 +1,11 @@
 <!--Contenido del formulario de login-->
 <!-- Debe contener la logica para redireccionar hacia home.vue si existe un login correcto-->
-
-<script setup>
-import Button from 'primevue/button';
+<script>
+export default {
+  // Componente de inicio
 import imgUrl from '../../assets/pinera.png';
 </script>
+
 
 <template>
   <div style="background-color: #d9d9d9;">
@@ -16,6 +17,7 @@ import imgUrl from '../../assets/pinera.png';
           <img src="../../assets/pinera.png" alt="Logo" style="width: 100%;height: 100%;margin-top: 20px;">
         </div>
       </div>
+
 
       <div class="columna2">
         <div style="height: 80vh;background-color: white;border-radius: 30px;">
