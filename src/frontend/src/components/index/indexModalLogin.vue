@@ -14,7 +14,6 @@
         </div>
       </div>
 
-
       <div class="columna2">
         <div style="height: 80vh;background-color: white;border-radius: 30px;">
           <div class="fila"
