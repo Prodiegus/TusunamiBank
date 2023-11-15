@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const url = "https://tsunamibank-backend.onrender.com/api"
+const url = "https://tsunamibank-backend.onrender.com/api/"
 
 export default class API {
 
