@@ -1,10 +1,12 @@
 <script setup>
-    import Button from 'primevue/button';
+import { useRouter } from 'vue-router';
 
-    const cerrarSesion = () => {
-        this.$router.push('/');
-        console.log("Se cierra sesion");
-    };
+const router = useRouter();
+const cerrarSesion = async () => {
+    await router.push({ name: 'index' });
+    //outer.push({ name: 'index' });
+    console.log("Cerrando sesión...");
+};
 
 </script>
 
@@ -21,7 +23,7 @@
             </div>
             <div class="spacer"></div>
             <div class="boton-container">
-                <Button class="boton" label="Sucursales" :ripple="false"/>
+                <Button class="boton" label="Sucursales" :ripple="false" />
                 <div class="vertical-line"></div>
                 <p style="margin-right: 20px;">Hola, Sebastián Piñera</p>
                 <img src="../icons/choripan.jpg" class="rounded-icono">
@@ -34,98 +36,98 @@
 </template>
 
 <style scoped>
-    @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300&display=swap');
 
-    .top-panel {
-        background-color: #0039A6;
-        font-family: 'Libre Franklin', sans-serif;
-        height: 100%;
-        width: 100%;
-        align-items: left;
-        display: flex;
-        position: relative;
-    }
+.top-panel {
+    background-color: #0039A6;
+    font-family: 'Libre Franklin', sans-serif;
+    height: 100%;
+    width: 100%;
+    align-items: left;
+    display: flex;
+    position: relative;
+}
 
-    .logo {
-        display: flex;
-        align-items: center;
-        margin-left: 20px;
-    }
+.logo {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
 
-    .logo-icono {
-        width: 100px;
-        height: 80px;
-        margin-right: 10px;
-    }
+.logo-icono {
+    width: 100px;
+    height: 80px;
+    margin-right: 10px;
+}
 
-    .text-container {
-        text-align: left;
-        color: white;
-    }
+.text-container {
+    text-align: left;
+    color: white;
+}
 
-    .logo-text {
-        font-weight: bold;
-        font-size: 40px;
-        margin-left: 10px;
-    }
+.logo-text {
+    font-weight: bold;
+    font-size: 40px;
+    margin-left: 10px;
+}
 
-    .subtitle {
-        font-size: 20px;
-        margin-left: 40px;
-        margin-bottom: 10px;
-    }
-    .star-icono {
-        width: 40px;
-        height: 40px;
-        margin-bottom: 35px;
-    }
+.subtitle {
+    font-size: 20px;
+    margin-left: 40px;
+    margin-bottom: 10px;
+}
 
-    .spacer {
-        flex: 1;
-    }
+.star-icono {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 35px;
+}
 
-    .boton-container {
-        color: #ffffff;
-        font-size: 18px;
-        text-align: right;
-        margin-right: 20px;
-        display: flex;
-        align-items: center;
-    }
+.spacer {
+    flex: 1;
+}
 
-    .boton {
-        color: #ffffff;
-        font-size: 18px;
-        background-color: transparent;
-        border-color: transparent;
-        margin-top: 18px;
-    }
+.boton-container {
+    color: #ffffff;
+    font-size: 18px;
+    text-align: right;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+}
 
-    .vertical-line {
-        width: 1px;
-        height: 40px;
-        background-color: white;
-        margin-left: 10px;
-        margin-right: 20px;
-    }
+.boton {
+    color: #ffffff;
+    font-size: 18px;
+    background-color: transparent;
+    border-color: transparent;
+    margin-top: 18px;
+}
 
-    .rounded-icono {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-    }
+.vertical-line {
+    width: 1px;
+    height: 40px;
+    background-color: white;
+    margin-left: 10px;
+    margin-right: 20px;
+}
 
-    .boton-cerrar {
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0;
-    }
+.rounded-icono {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
 
-    .cerrar-icono {
-        width: 35px;
-        height: 35px;
-        margin-left: 20px;
-    }
+.boton-cerrar {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
 
+.cerrar-icono {
+    width: 35px;
+    height: 35px;
+    margin-left: 20px;
+}
 </style>

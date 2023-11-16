@@ -6,6 +6,7 @@ const routes = [
     name: 'index',
     component: () => import('./pages/index.vue'),
   },
+
   {
     path: '/home',
     name: 'home',
@@ -17,5 +18,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
+
 
 export default router;
