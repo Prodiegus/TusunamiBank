@@ -11,14 +11,11 @@ const visible = ref(false);
 </script>
 
 <template>
-    <div>
-        <Button label="Show" icon="pi pi-external-link" @click="visible = true" />
+    <div class="card flex justify-content-center">
+        <Button label="Login" icon="pi pi-external-link" @click="visible = true" />
 
-        <Dialog v-model:visible="visible" modal :style="{ width: '100rem',height: '100rem' } "
-            >
+        <Dialog v-model:visible="visible" modal :style="{ width: '100rem', height: '100rem' }">
             <indexModalLogin></indexModalLogin>
         </Dialog>
-
-    <h1>Aqui va el contenido del Header del landing page</h1>
-    
-</div></template>
+    </div>
+</template>
