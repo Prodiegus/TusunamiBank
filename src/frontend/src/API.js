@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const url = "http://localhost:8080/api/"
+const url = "https://tsunamibank-backend.onrender.com/api/"
 
 export default class API {
 
@@ -20,6 +20,19 @@ export default class API {
             return res.data
         } catch (error) {
             return error.response.data
+        }
+    }
+    
+    static async logusuario(data) {
+        try {
+
+            const res = await axios.post(url + "logusuario", data)
+            return res.data
+
+        } catch (error) {
+
+            return error.response.data
+
         }
     }
 

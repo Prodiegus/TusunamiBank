@@ -10,7 +10,7 @@ import index from './pages/index.vue';
 import home from './pages/home.vue';
 
 import { onMounted } from 'vue';
-import API from '@/api';
+import API from '@/API.js';
 
 
 // Forma de crear metodos
@@ -22,7 +22,7 @@ onMounted(() => {
   //addUsuario();
 });
 
-const newAccount = true; // Placeholder para implementar lo del localstorage despues
+const newAccount = false; // Placeholder para implementar lo del localstorage despues
 
 </script>
 

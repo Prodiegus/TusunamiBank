@@ -128,4 +128,37 @@ router.delete('/deleteUsuarioByID', async(req, res) => {
   }
 );
 
+router.post('/logusuario', async(req, res) => {
+  console.log(req.body)
+  const rut = req.body.rut;
+  const password = req.body.password;
+
+  const response = await usuarioSchema.findOne({rut:rut})
+  
+  .then((result) => {
+    console.log(result)
+    if (result.password === password && password !== null) {
+      console.log("Usuario Encontrado")
+      res.json({
+        "resplogin":true,
+        "usuario":result
+       
+       })
+      
+    }
+    else{
+      console.log("Usuario Incorrecto")
+      res.json({
+      "resplogin":false,
+      "usuario":{}
+
+      })
+    }    
+  })
+  .catch((err) => {
+    console.log(err)
+    res.json(err)
+  }); 
+  }
+);
 module.exports = router;
