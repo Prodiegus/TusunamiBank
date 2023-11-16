@@ -8,6 +8,10 @@
     { fecha: '2/09/2019', tipo: 'Retiro', sucursal: 'Talca', monto: '2.000.000.000' },
     { fecha: '3/09/2023', tipo: 'Deposito', sucursal: 'Santiago', monto: '500.000' },
     { fecha: '4/09/2019', tipo: 'Retiro', sucursal: 'Islas Caimán', monto: '2.000.000' },
+    { fecha: '1/09/2023', tipo: 'Deposito', sucursal: 'Islas Caimán', monto: '5.000.000' },
+    { fecha: '2/09/2019', tipo: 'Retiro', sucursal: 'Talca', monto: '2.000.000.000' },
+    { fecha: '3/09/2023', tipo: 'Deposito', sucursal: 'Santiago', monto: '500.000' },
+    { fecha: '4/09/2019', tipo: 'Retiro', sucursal: 'Islas Caimán', monto: '2.000.000' },
     
     ];
     //informacion de la cuenta actual , se actualizan en la card
