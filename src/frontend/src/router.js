@@ -14,11 +14,10 @@ const routes = [
   },
 
   {
-    path: '/registerpage',
-    name: 'registerpage',
-    component: () => import('./pages/register.vue')
-  }
-
+    path: '/registro',
+    name: 'registro',
+    component: () => import('./pages/registro.vue'),
+  },
 ];
 
 const router = createRouter({

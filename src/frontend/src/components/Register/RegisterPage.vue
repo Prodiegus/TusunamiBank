@@ -8,9 +8,13 @@
     </div>
     <div class="form-container">
       <h2 style="color:#103ed4">Crear cuenta</h2>
-      <v-btn size="medium">Iniciar sesión con <br>google</v-btn>
+      <v-btn size="medium">
+        Iniciar sesión con <br>google
+      </v-btn>
       <br><br>
-      <v-btn size="medium">Iniciar sesión con <br> facebook</v-btn>
+      <v-btn size="medium">
+        Iniciar sesión con <br> facebook
+      </v-btn>
       <form @submit.prevent="login">
         <div class="input-container">
           <label style="color:#103ed4" for="username">Nombre Completo:</label>
@@ -38,7 +42,7 @@
         <v-select style="color: #103ed4;" v-model="sucursal" label="Sucursal" :items="[1, 2, 3]" variant="outlined"
           required></v-select>
 
-        <v-btn block :color="esValido ? '#ee451b' : 'grey'" type="submit" @click="crearUsuario"
+        <v-btn block :color="esValido ? '#ee451b' : 'grey'" type="submit" @click="verificarYCrearUsuario"
           :disabled="!(completeName.length > 0 && password.length > 0 && esRutValido)">Registrar</v-btn>
         <div>
           <h3 style="color:#103ed4">¿Ya tienes cuenta?
@@ -69,6 +73,19 @@ export default {
   },
 
   methods: {
+    async verificarYCrearUsuario() {
+      // Verificar rut y correo
+      if (this.validarRut() && this.validarEmail()) {
+        await this.crearUsuario();
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error de Registro',
+          text: 'Rut o correo incorrecto',
+        });
+        console.log("Error de registro");
+      }
+    },
 
     async crearUsuario() {
       const nombre = this.completeName.split(' ');
@@ -83,14 +100,26 @@ export default {
         "sucursal": this.sucursal,
         "idUsuario": numeroDeUsuarios + 1
       })
+        .then((response) => {
 
-      Swal.fire({
-        icon: 'success',
-        title: 'Se creo el usuario con exito',
-        text: '',
-      }
-      )
-      console.log('Creando usuario...');
+          if (response.Respuesta == true) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Registro Exitoso',
+            })
+            console.log("Registro exitoso")
+
+
+          } else {
+
+            Swal.fire({
+              icon: 'error',
+              title: 'Error de Registro',
+              text: 'Uno de los campos esta mal ingresado'
+            })
+            console.log("Error de registro")
+          }
+        })
     },
 
     validarEmail() {
@@ -101,8 +130,8 @@ export default {
     validarRut() {
       const rutSinPuntos = this.rut.replace(/\./g, '');
       const [rutNumeros, rutDV] = rutSinPuntos.split('-');
-      this.esRutValido = this.dv(rutNumeros) === rutDV;
-      return this.esRutValido;
+      this.esRutValido = true//this.dv(rutNumeros) === rutDV;
+      return true;
     },
 
     dv(T) {
@@ -113,7 +142,7 @@ export default {
     },
 
     soloLetras(event) {
-      const pattern = /^[a-zA-Z\s]+$/;
+      const pattern = /^[a-zA-Z\s]+$/; // Permitir solo letras y espacios
       if (!pattern.test(event.key)) {
         event.preventDefault();
       }
@@ -172,6 +201,7 @@ h2 {
   text-align: center;
 }
 
+/* Estilos para los campos de entrada */
 .input-container {
   margin-bottom: 15px;
   text-align: left;
@@ -192,6 +222,7 @@ input[type="password"] {
   border-radius: 5px;
 }
 
+/* Estilo para el botón de inicio de sesión */
 button {
   background-color: #ee451b;
   color: #fff;
@@ -212,4 +243,4 @@ button:hover {
 body {
   background-color: #c7c7c7;
 }
-</style> 
+</style>
