@@ -94,6 +94,27 @@ const iniciarSesion = async () => {
 
       <section style="background-color: #D9D9D9 ;">
         <v-carousel hide-delimiters cycle interval="2000" show-arrows>
+          <template v-slot:prev="{ props }">
+            <v-btn
+              variant="elevated"
+              color="white"
+              @click="props.onClick"
+              :rounded="true"
+              >
+              <i class="pi pi-chevron-left"></i>
+            </v-btn>
+          </template>
+
+          <template v-slot:next="{ props }">
+            <v-btn
+              variant="elevated"
+              color="white"
+              @click="props.onClick"
+              :rounded="true"
+              >
+              <i class="pi pi-chevron-right"></i>
+            </v-btn>
+          </template>
           <v-carousel-item>
             <img class="carousel-image"
               src="https://cooperativa.cl/noticias/site/artic/20190829/imag/foto_0000002920190829085935.jpg"
@@ -178,7 +199,8 @@ const iniciarSesion = async () => {
       </v-footer>
 
     </v-content>
-</v-app></template>
+  </v-app>
+</template>
 
 
 <style scoped>
