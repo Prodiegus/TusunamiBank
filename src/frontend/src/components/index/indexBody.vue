@@ -92,8 +92,8 @@ const iniciarSesion = async () => {
 
 
 
-      <section style="background-color: beige;">
-        <v-carousel hide-delimiters>
+      <section style="background-color: #D9D9D9 ;">
+        <v-carousel hide-delimiters cycle interval="2000" show-arrows>
           <v-carousel-item>
             <img class="carousel-image"
               src="https://cooperativa.cl/noticias/site/artic/20190829/imag/foto_0000002920190829085935.jpg"
@@ -126,29 +126,29 @@ const iniciarSesion = async () => {
                       <div class="headline" style="text-align: center;">Giro Cajero automático</div>
                     </v-card-title>
                     <v-card-text style="text-align: center;">
-                      Sin comisiones en giro <br> Cajero automático
+                      Sin comisiones los primeros 4 giros <br> Retiros adicionales comisión $400
                     </v-card-text>
                   </v-card>
                 </v-col>
                 <v-col cols="4" style="margin-left: 100px;">
                   <v-card class="elevation-0 transparent">
                     <v-card-title primary-title>
-                      <div class="headline" style="text-align: center;">Primera transferencia</div>
+                      <div class="headline" style="text-align: center;">Cuenta de Ahorros</div>
                     </v-card-title>
                     <v-card-text style="text-align: center;">
-                      Límite de Transferencia <br>
-                      $250.000
+                      Depósito inicial <br>
+                      $100.000
                     </v-card-text>
                   </v-card>
                 </v-col>
                 <v-col cols="4" style="margin-left: 100px;">
                   <v-card class="elevation-0 transparent">
                     <v-card-title primary-title>
-                      <div class="headline" style="text-align: center;">Límite diario</div>
+                      <div class="headline" style="text-align: center;">Sin límite diario</div>
                     </v-card-title>
                     <v-card-text style="text-align: center;">
-                      Desde la segunda Transferencia <br>
-                      $5.000.000
+                      Límite cuenta vista <br>
+                      Saldo máximo $2.500.000
                     </v-card-text>
                   </v-card>
                 </v-col>
