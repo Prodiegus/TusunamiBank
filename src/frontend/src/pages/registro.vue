@@ -41,7 +41,7 @@
 						<input @input="validarPassword" type="password" id="password" :maxlength="10" :counter="10"
 							v-model="password" required>
 						<p v-if="!contraValida" style="color: red;">La contraseña ingresada no es válida.</p>
-						<p style="color: black">La contraseña debe contener minimo 6 caracteres y 1 digito (puede contener caracteres especiales)</p>
+						<p style="color: black">La contraseña debe contener como máximo 9 caracteres y 1 digito (puede contener caracteres especiales)</p>
 					</div>
 
 					<v-select style="color: #103ed4;" v-model="sucursal" label="Sucursal" :items="[1, 2, 3]"
@@ -52,7 +52,7 @@
 
 					<div>
 						<h3 style="color:#103ed4">¿Ya tienes cuenta?
-							<router-link to="login">Iniciar Sesión</router-link>
+							<router-link to="/logintest">Iniciar Sesión</router-link>
 							<br><br>
 						</h3>
 					</div>
@@ -63,136 +63,122 @@
 	</div>
 </template>
 	
-<script>
+<script setup>
+import { ref } from 'vue';
 import API from '@/API.js';
 import Swal from 'sweetalert2';
+import { useRouter } from 'vue-router';
 
-export default {
-	data() {
-		return {
-			completeName: '',
-			rut: '',
-			email: '',
-			password: '',
-			sucursal: '',
-			esValido: false,
-			esRutValido: true,
-			contraValida: true
-		};
-	},
+const router = useRouter()
+const completeName = ref('');
+const rut = ref('');
+const email = ref('');
+const password = ref('');
+const sucursal = ref('');
+const esValido = ref(false);
+const esRutValido = ref(true);
+const contraValida = ref(true);
 
-	methods: {
-		async verificarYCrearUsuario() {
-			// Verificar rut y correo
-			if (this.validarRut() && this.validarEmail()) {
-				await this.crearUsuario();
-			} else {
-				Swal.fire({
-					icon: 'error',
-					title: 'Error de Registro',
-					text: 'Rut o correo incorrecto',
-				});
-				console.log("Error de registro");
-			}
-		},
-
-		async crearUsuario() {
-			const nombre = this.completeName.split(' ');
-			const numeroDeUsuarios = await API.getNumeroUsuarios();
-			await API.addUsuario({
-				"nombres": nombre[0] + " " + nombre[1],
-				"apellidoPaterno": nombre[2],
-				"apellidoMaterno": nombre[3],
-				"email": this.email.toLowerCase(),
-				"rut": this.rut,
-				"password": this.password,
-				"sucursal": this.sucursal,
-				"idUsuario": numeroDeUsuarios + 1
-			})
-				.then((response) => {
-
-					if (response.Respuesta == true) {
-						Swal.fire({
-							icon: 'success',
-							title: 'Registro Exitoso',
-						})
-						console.log("Registro exitoso")
-						this.$router.push({ path: '/logintest' })
-
-					} else {
-
-						Swal.fire({
-							icon: 'error',
-							title: 'Error de Registro',
-							text: 'Uno de los campos esta mal ingresado'
-						})
-						console.log("Error de registro")
-					}
-				})
-		},
-
-		validarEmail() {
-
-			const expresionRegular = /\.(com|cl|net)$/;
-
-			const correoEnMinusculas = this.email.toLowerCase();
-
-
-			this.esValido = correoEnMinusculas.includes('@') && expresionRegular.test(correoEnMinusculas);
-			return this.esValido;
-
-		},
-
-		validarRut() {
-			const rutSinPuntos = this.rut.replace(/\./g, '').replace(/\s/g, '');
-			const [rutNumeros, rutDV] = rutSinPuntos.split('-');
-			if (!rutNumeros || !rutDV || rutNumeros.length !== 8 || rutDV.length !== 1
-				|| !/^\d*$/.test(rutNumeros) ||
-				(!/^\d*$/.test(rutDV) && rutDV.toLowerCase() !== 'k')) {
-				this.esRutValido = false;
-				return false;
-			}
-			else {
-				this.esRutValido = true;
-				return true;
-			}
-		},
-
-		validarPassword() {
-			const password = this.password
-			if (!/^[^\d]*\d+[^\d]*$/.test(password) || password.length < 6) {
-				this.contraValida = false;
-				return false;
-			}
-			else {
-				this.contraValida = true;
-				return true;
-			}
-		},
-
-		dv(T) {
-			let M = 0, S = 1;
-			for (; T; T = Math.floor(T / 10))
-				S = (S + T % 10 * (9 - M++ % 6)) % 11;
-			return S ? String(S - 1) : 'K';
-		},
-
-		soloLetras(event) {
-			const pattern = /^[a-zA-Z\s]+$/; // Permitir solo letras y espacios
-			if (!pattern.test(event.key)) {
-				event.preventDefault();
-			}
-		},
-
-		login() {
-			// Lógica de inicio de sesión
-			// console.log('Iniciando sesión...');
-		},
-	},
+const verificarYCrearUsuario = async () => {
+  if (validarRut() && validarEmail()) {
+    await crearUsuario();
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error de Registro',
+      text: 'Rut o correo incorrecto',
+    });
+    console.log("Error de registro");
+  }
 };
+
+const crearUsuario = async () => {
+  const nombre = completeName.value.split(' ');
+  const numeroDeUsuarios = await API.getNumeroUsuarios();
+  const response = await API.addUsuario({
+    "nombres": nombre[0] + " " + nombre[1],
+    "apellidoPaterno": nombre[2],
+    "apellidoMaterno": nombre[3],
+    "email": email.value.toLowerCase(),
+    "rut": rut.value,
+    "password": password.value,
+    "sucursal": sucursal.value,
+    "idUsuario": numeroDeUsuarios + 1
+  });
+
+  if (response.Respuesta == true) {
+    Swal.fire({
+      icon: 'success',
+      title: 'Registro Exitoso',
+    });
+    console.log("Registro exitoso");
+  
+    router.push({ path: '/logintest' });
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error de Registro',
+      text: 'Cuenta ya registrada',
+    });
+    console.log("Error de registro");
+  }
+};
+
+const validarEmail = () => {
+  const expresionRegular = /\.(com|cl|net)$/;
+  const correoEnMinusculas = email.value.toLowerCase();
+  esValido.value = correoEnMinusculas.includes('@') && expresionRegular.test(correoEnMinusculas);
+  return esValido.value;
+};
+
+const validarRut = () => {
+  const rutSinPuntos = rut.value.replace(/\./g, '').replace(/\s/g, '');
+  const [rutNumeros, rutDV] = rutSinPuntos.split('-');
+  if (!rutNumeros || !rutDV || rutNumeros.length !== 8 || rutDV.length !== 1 || !/^\d*$/.test(rutNumeros) ||
+    (!/^\d*$/.test(rutDV) && rutDV.toLowerCase() !== 'k')) {
+    esRutValido.value = false;
+    return false;
+  } else {
+    esRutValido.value = true;
+    return true;
+  }
+};
+
+const validarPassword = () => {
+  const passwordValue = password.value;
+  if (!/^[^\d]*\d+[^\d]*$/.test(passwordValue) || passwordValue.length < 6) {
+    contraValida.value = false;
+    return false;
+  } else {
+    contraValida.value = true;
+    return true;
+  }
+};
+
+const dv = (T) => {
+  let M = 0, S = 1;
+  for (; T; T = Math.floor(T / 10))
+    S = (S + T % 10 * (9 - M++ % 6)) % 11;
+  return S ? String(S - 1) : 'K';
+};
+
+const soloLetras = (event) => {
+  const pattern = /^[a-zA-Z\s]+$/; // Permitir solo letras y espacios
+  if (!pattern.test(event.key)) {
+    event.preventDefault();
+  }
+};
+
+const login = () => {
+  // Lógica de inicio de sesión
+  // console.log('Iniciando sesión...');
+};
+
+
 </script>
+
 	
-<style setup>
+<style scoped>
 .main {
 	position: absolute;
 	top: 0;
