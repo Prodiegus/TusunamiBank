@@ -1,4 +1,5 @@
 <script setup>
+
 /* const registro = async () => {
   console.log('Yendo al registro')
 }
@@ -16,6 +17,7 @@ const iniciarSesion = async () => {
       <v-toolbar-items>
         <v-btn class="registro" variant="tonal" to="/registro" color="black">Registrarse</v-btn>
         <v-btn class="iniciarSesion" @click="login" variant="tonal" to="/iniciarSesion" color="black">Iniciar Sesión</v-btn>
+
       </v-toolbar-items>
     </v-toolbar>
     <v-content>
@@ -115,23 +117,52 @@ const iniciarSesion = async () => {
         </div>
       </section>
 
-      <section>
-        <v-parallax
-          src="https://assets.eldesconcierto.cl/2020/04/A_UNO_1178625-1024x706.jpg"
-          height="380"
-          class="d-flex align-center"
-        >
-          <v-container class="d-flex justify-center">
-            <div style="text-align: center; color: white; font-size: 24px">
-              Endorfine is a social network that allows everyone to reach a huge audience with a tap
-              <em
-                >With the power of Endorfine you don't need to be famous or post pics of cute cats
-                in order to get visibility</em
+
+
+
+
+      <section style="background-color: #D9D9D9 ;">
+        <v-carousel hide-delimiters cycle interval="2000" show-arrows>
+          <template v-slot:prev="{ props }">
+            <v-btn
+              variant="elevated"
+              color="white"
+              @click="props.onClick"
+              :rounded="true"
               >
-              <div><v-btn class="my-5">Get more info</v-btn></div>
-            </div>
-          </v-container>
-        </v-parallax>
+              <i class="pi pi-chevron-left"></i>
+            </v-btn>
+          </template>
+
+          <template v-slot:next="{ props }">
+            <v-btn
+              variant="elevated"
+              color="white"
+              @click="props.onClick"
+              :rounded="true"
+              >
+              <i class="pi pi-chevron-right"></i>
+            </v-btn>
+          </template>
+          <v-carousel-item>
+            <img class="carousel-image"
+              src="https://cooperativa.cl/noticias/site/artic/20190829/imag/foto_0000002920190829085935.jpg"
+              alt="Imagen en el carousel" />
+          </v-carousel-item>
+
+          <v-carousel-item>
+            <img class="carousel-image"
+              src="https://m.cooperativa.cl/noticias/site/artic/20180914/imag/foto_0000001120180914010035.jpg"
+              alt="Imagen en el carousel" />
+          </v-carousel-item>
+
+          <v-carousel-item>
+            <img class="carousel-image"
+              src="https://www.laizquierdadiario.cl/local/cache-vignettes/L705xH518/arton184372-b4114.jpg?1700214165D"
+              alt="Imagen en el carousel" />
+          </v-carousel-item>
+
+        </v-carousel>
       </section>
 
       <section>
@@ -139,36 +170,35 @@ const iniciarSesion = async () => {
           <v-layout class="my-5">
             <div class="d-flex justify-center">
               <div class="d-flex justify-center">
-                <v-col cols="4">
+                <v-col cols="4" style="margin-left: 100px;">
                   <v-card class="elevation-0 transparent">
                     <v-card-title primary-title>
-                      <div class="headline">Company info</div>
+                      <div class="headline" style="text-align: center;">Giro Cajero automático</div>
                     </v-card-title>
-                    <v-card-text>
-                      We are not a company. We hate companies. Just imagine us like the guys from
-                      the Silicon Valley series.
+                    <v-card-text style="text-align: center;">
+                      Sin comisiones los primeros 4 giros <br> Retiros adicionales comisión $400
                     </v-card-text>
                   </v-card>
                 </v-col>
-                <v-col cols="4">
+                <v-col cols="4" style="margin-left: 100px;">
                   <v-card class="elevation-0 transparent">
                     <v-card-title primary-title>
-                      <div class="headline">We are hiring</div>
+                      <div class="headline" style="text-align: center;">Cuenta de Ahorros</div>
                     </v-card-title>
-                    <v-card-text>
-                      Are you a creative person? Do you like techy stuff? Complete the email form by
-                      writing your skills and interests
+                    <v-card-text style="text-align: center;">
+                      Depósito inicial <br>
+                      $100.000
                     </v-card-text>
                   </v-card>
                 </v-col>
-                <v-col cols="4">
+                <v-col cols="4" style="margin-left: 100px;">
                   <v-card class="elevation-0 transparent">
                     <v-card-title primary-title>
-                      <div class="headline">About Piñera</div>
+                      <div class="headline" style="text-align: center;">Sin límite diario</div>
                     </v-card-title>
-                    <v-card-text>
-                      Piñera es el expresidente del mejor pais de Chile , mas conocido por robarse
-                      el banco de Talca (La peor ciudad de Chile) en la decada de los Ochenta.
+                    <v-card-text style="text-align: center;">
+                      Límite cuenta vista <br>
+                      Saldo máximo $2.500.000
                     </v-card-text>
                   </v-card>
                 </v-col>
@@ -182,28 +212,29 @@ const iniciarSesion = async () => {
         <v-container>
           <div>
             <div class="d-flex justify-center">
-              <img src="../icons/logo.png" style="height: 200px; text-align: center" />
+              <img src="@/assets/banco.png" style="height: 200px; text-align:center">
             </div>
           </div>
         </v-container>
       </section>
 
+
       <v-footer class="d-flex justify-center my-5">
         <div>
-          Acerca de nuestro salvador
-          <a
-            class="white--text"
-            href="https://es.wikipedia.org/wiki/Sebasti%C3%A1n_Pi%C3%B1era"
-            target="_blank"
-            style="color: #0039a6"
-          >
-            Sebastian Piñera</a
-          >
+          Acerca de nuestro salvador <a class="white--text"
+            href="https://es.wikipedia.org/wiki/Sebasti%C3%A1n_Pi%C3%B1era" target="_blank" style="color:#0039A6">
+            Sebastian Piñera</a>
         </div>
       </v-footer>
+
     </v-content>
   </v-app>
 </template>
 
 <style scoped>
+.carousel-image {
+  width: 50%;
+  height: 100%;
+  margin-left: 25%;
+}
 </style>
