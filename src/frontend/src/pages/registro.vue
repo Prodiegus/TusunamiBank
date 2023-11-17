@@ -34,7 +34,7 @@
 						<input @input="validarEmail" type="text" id="correo electronico" :maxlength="50" :counter="50"
 							v-model="email" required>
 						<p v-if="esValido"></p>
-						<p v-else style="color: black">El correo electrónico debe contener al menos un "@".</p>
+						<p v-else style="color: black">El correo electrónico debe contener al menos un "@" y terminar en .com o .cl .</p>
 					</div>
 					<div class="input-container">
 						<label style="color:#103ed4" for="password">Contraseña:</label>
@@ -112,7 +112,7 @@ export default {
 							title: 'Registro Exitoso',
 						})
 						console.log("Registro exitoso")
-
+						this.$router.push({ path: '/logintest' })
 
 					} else {
 
@@ -127,8 +127,14 @@ export default {
 		},
 
 		validarEmail() {
-			this.esValido = this.email.includes('@');
-			return this.esValido;
+		
+		const expresionRegular = /\.(com|cl|net)$/;
+
+		const correoEnMinusculas = this.email.toLowerCase();
+
+
+		this.esValido = correoEnMinusculas.includes('@') && expresionRegular.test(correoEnMinusculas);
+		return this.esValido;
 		},
 
 		validarRut() {

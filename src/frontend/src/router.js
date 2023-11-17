@@ -18,6 +18,11 @@ const routes = [
     name: 'registro',
     component: () => import('./pages/registro.vue'),
   },
+  {
+    path: '/logintest',
+    name: 'logintest',
+    component: () => import('./pages/logintest.vue'),
+  },
 ];
 
 const router = createRouter({
