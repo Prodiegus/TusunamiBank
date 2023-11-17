@@ -1,7 +1,6 @@
 <!-- Componente designado para contener el formulario de registro del mockup-->
 <!-- Debe contener la logica necesaria para redireccionar hacia home si el registro fue exitoso-->
 <template>
-
 	<div class="main">
 		<div class="registro-container">
 			<div class="image-container">
@@ -9,7 +8,7 @@
 					<br>Tusunami
 				</div>
 				<div>
-					<img src="../../assets/pinera.png" alt="Logo" style="width: 100%;height: 100%;margin-top: 20px;">
+					<img src="/pinera.png" alt="Logo" style="width: 100%;height: 100%;margin-top: 20px;">
 				</div>
 			</div>
 
@@ -24,7 +23,7 @@
 					</div>
 					<div class="input-container">
 						<label style="color:#103ed4" for="rut">Rut:</label>
-						<input type="text" id="rut" :maxlength="12" :counter="12" v-model="rut" @input="validarRut"
+						<input type="text" id="rut" :maxlength="10" :counter="10" v-model="rut" @input="validarRut"
 							required>
 						<p v-if="!esRutValido" style="color: red;">El Rut ingresado no es válido.</p>
 						<p style="color: black">El rut tiene el siguiente formato: 12345678-9.</p>
@@ -34,18 +33,23 @@
 						<input @input="validarEmail" type="text" id="correo electronico" :maxlength="50" :counter="50"
 							v-model="email" required>
 						<p v-if="esValido"></p>
-						<p v-else style="color: black">El correo electrónico debe contener al menos un "@" y terminar en .com o .cl .</p>
+						<p v-else style="color: black">El correo electrónico debe contener al menos un "@" y terminar en
+							.com o .cl .</p>
 					</div>
 					<div class="input-container">
 						<label style="color:#103ed4" for="password">Contraseña:</label>
-						<input type="password" id="password" :maxlength="50" :counter="50" v-model="password" required>
+						<input @input="validarPassword" type="password" id="password" :maxlength="10" :counter="10"
+							v-model="password" required>
+						<p v-if="!contraValida" style="color: red;">La contraseña ingresada no es válida.</p>
+						<p style="color: black">La contraseña debe contener minimo 6 caracteres y 1 digito (puede contener caracteres especiales)</p>
 					</div>
 
 					<v-select style="color: #103ed4;" v-model="sucursal" label="Sucursal" :items="[1, 2, 3]"
 						variant="outlined" required></v-select>
 
 					<v-btn block :color="esValido ? '#ee451b' : 'grey'" type="submit" @click="verificarYCrearUsuario"
-						:disabled="!(completeName.length > 0 && password.length > 0 && esRutValido)">Registrar</v-btn>
+						:disabled="!(completeName.length > 0 && contraValida && esRutValido)">Registrar</v-btn>
+
 					<div>
 						<h3 style="color:#103ed4">¿Ya tienes cuenta?
 							<router-link to="login">Iniciar Sesión</router-link>
@@ -73,6 +77,7 @@ export default {
 			sucursal: '',
 			esValido: false,
 			esRutValido: true,
+			contraValida: true
 		};
 	},
 
@@ -127,21 +132,42 @@ export default {
 		},
 
 		validarEmail() {
-		
-		const expresionRegular = /\.(com|cl|net)$/;
 
-		const correoEnMinusculas = this.email.toLowerCase();
+			const expresionRegular = /\.(com|cl|net)$/;
+
+			const correoEnMinusculas = this.email.toLowerCase();
 
 
-		this.esValido = correoEnMinusculas.includes('@') && expresionRegular.test(correoEnMinusculas);
-		return this.esValido;
+			this.esValido = correoEnMinusculas.includes('@') && expresionRegular.test(correoEnMinusculas);
+			return this.esValido;
+
 		},
 
 		validarRut() {
-			const rutSinPuntos = this.rut.replace(/\./g, '');
+			const rutSinPuntos = this.rut.replace(/\./g, '').replace(/\s/g, '');
 			const [rutNumeros, rutDV] = rutSinPuntos.split('-');
-			this.esRutValido = true//this.dv(rutNumeros) === rutDV;
-			return true;
+			if (!rutNumeros || !rutDV || rutNumeros.length !== 8 || rutDV.length !== 1
+				|| !/^\d*$/.test(rutNumeros) ||
+				(!/^\d*$/.test(rutDV) && rutDV.toLowerCase() !== 'k')) {
+				this.esRutValido = false;
+				return false;
+			}
+			else {
+				this.esRutValido = true;
+				return true;
+			}
+		},
+
+		validarPassword() {
+			const password = this.password
+			if (!/^[^\d]*\d+[^\d]*$/.test(password) || password.length < 6) {
+				this.contraValida = false;
+				return false;
+			}
+			else {
+				this.contraValida = true;
+				return true;
+			}
 		},
 
 		dv(T) {
@@ -167,14 +193,12 @@ export default {
 </script>
 	
 <style setup>
-
-
-.main{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    min-height: 100%;
+.main {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-height: 100%;
 }
 
 .registro-container {
