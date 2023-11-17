@@ -1,13 +1,10 @@
 <!--Contenido del formulario de login-->
 <!-- Debe contener la logica para redireccionar hacia home.vue si existe un login correcto-->
 
-<script setup>
-import Button from 'primevue/button';
-import imgUrl from '../../assets/pinera.png';
-</script>
+
 
 <template>
-  <div style="background-color: #d9d9d9;">
+  <div >
     <div class="contenedor">
       <div class="columna1">
         <div class="fila" style="color: red; text-align: center; font-weight:800; font-size: 40px ;">Bancos <br>Tusunami
@@ -161,14 +158,14 @@ body {
 
 .columna1 {
   flex: 1;
-
+  background-color: #d9d9d9;
   padding: 20px;
 }
 
 .columna2 {
 
   flex: 1;
-
+  background-color: #d9d9d9;
   padding: 20px;
 }
 

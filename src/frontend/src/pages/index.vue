@@ -1,3 +1,4 @@
+
 <!-- Esta pagina es el landing page-->
 <!-- Permite que un nuevo usuario vea los tipos de cuenta y/o ofertas del banco-->
 <!-- Otorga al usuario la opcion de redirección a registro (en este mismo componente) o login
@@ -11,14 +12,14 @@ import indexBody from '../components/index/indexBody.vue'
 
 </script>
 <template>
-  <div>
-    <Row >
+  <v-app>
+    <v-app-bar>
     <indexHeader></indexHeader>
-  </Row>
-  <Row>
+    </v-app-bar>
+  <v-main>
     <indexBody></indexBody> <!-- contenido del landing page-->
-  </Row>
-  </div>
+  </v-main>
+</v-app>
 </template>
 
 <style scoped>
