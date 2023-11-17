@@ -6,7 +6,6 @@
 -->
 
 <script setup>
-import indexHeader from '../components/index/indexHeader.vue'
 import indexBody from '../components/index/indexBody.vue'
 
 
