@@ -38,7 +38,7 @@ const iniciarSesion = async () => {
                <div style="text-align:center">
                  <h2>The best way to share your amazing stuff</h2>
                  <span class="subheading">
-                   No more restrictions, no more limits
+                   No more restrictions, no more limitssss
                  </span>
                </div>
             </div>
