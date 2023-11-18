@@ -6,10 +6,6 @@
 -->
 
 <script setup>
-
-/* import index from './pages/index.vue';
-import registro from './pages/registro.vue';
-import logintest from './pages/logintest.vue';
 import { onMounted } from 'vue';
 import API from '@/API.js';
 
