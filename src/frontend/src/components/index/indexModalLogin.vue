@@ -35,14 +35,14 @@
           <div class="fila">
             <div class="input-container">
               <label for="miCuadroDeTexto" style="color: #0f45ab;font-weight: 800;">RUT:</label>
-              <input type="text" id="rut" class="underline-input" name="rut">
+              <input type="text" id="rut" class="underline-input" name="rut" v-model="rut">
               <p id="mensajeDeError" style="color: red;">{{mensajeDeError}}</p>
             </div>
           </div>
           <div class="fila">
             <div class="input-container">
               <label for="password" style="color: #0f45ab;font-weight: 800;">Contraseña</label>
-              <input type="password" id="password" class="underline-input" name="password">
+              <input type="password" id="password" class="underline-input" name="password" v-model="password">
             </div>
           </div>
           <div class="fila">
@@ -94,6 +94,7 @@
         validarFormato(vrut){
             const rutRegex = /^[0-9]+[-|‐]{1}[0-9kK]{1}$/;
             // Validar el formato
+            console.log("validando")
             if (rutRegex.test(vrut)) {
               console.log("valido")
               return true;
@@ -120,19 +121,22 @@
           console.log("contraseña:"+texto2);
         },
         async login() {
-            const rut=document.getElementById("rut").value;
-            const password=document.getElementById("password").value;
+            //const rut=document.getElementById("rut").value;
+            //const password=document.getElementById("password").value;
             
             await API.logusuario({
-                "rut": rut,
-                "password": password
+                "rut": this.rut,
+                "password": this.password
             })
             .then((result) => {
-                if(rut != "" && password != "" && this.validarFormato(rut) && result.resplogin){
+                const formato = this.validarFormato(this.rut);
+                if(this.rut != "" && this.password != "" && formato && result.data){
                   this.successMessage();
+                  //console.log("rut: "+this.rut);
                   this.$router.push('/home');
                 }else{
                     this.failedMessage();
+                    console.log("password: "+this.password);
                 }	
             })
             .catch((err) => {
