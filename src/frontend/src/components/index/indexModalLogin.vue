@@ -36,13 +36,14 @@
             <div class="input-container">
               <label for="miCuadroDeTexto" style="color: #0f45ab;font-weight: 800;">RUT:</label>
               <input type="text" id="rut" class="underline-input" name="rut" v-model="rut">
-              <p id="mensajeDeError" style="color: red;">{{mensajeDeError}}</p>
+              <p id="mensajeRUTError" style="color: red;">{{mensajeRUTError}}</p>
             </div>
           </div>
           <div class="fila">
             <div class="input-container">
               <label for="password" style="color: #0f45ab;font-weight: 800;">Contraseña</label>
               <input type="password" id="password" class="underline-input" name="password" v-model="password">
+              <p id="mensajePasswordError" style="color: red;">{{mensajePasswordError}}</p>
             </div>
           </div>
           <div class="fila">
@@ -82,7 +83,8 @@
             flagInicioSesion: true,
             mensajes: [],
             count: 0,
-            mensajeDeError: '',
+            mensajeRUTError: '',
+            mensajePasswordError: '',
             showAlert: true,
             tipoMensajes: {
                 success: 'success',
@@ -91,22 +93,39 @@
         }
     },
     methods: {
-        validarFormato(vrut){
-            const rutRegex = /^[0-9]+[-|‐]{1}[0-9kK]{1}$/;
+        validarFormatoPassword(){
+            const passwordRegex = /^(?=.*[0-9])[a-zA-Z0-9]{6,}$/;
+            const testPass =passwordRegex.test(this.password);
             // Validar el formato
-            console.log("validando")
-            if (rutRegex.test(vrut)) {
+            if (testPass) {
               console.log("valido")
               return true;
             } else {
               console.log("invalido")
-              this.mensajeDeError = "RUT invalido"
+              this.mensajePasswordError = "Contraseña invalida"
               setTimeout(()=> {
-            // Ocultar el elemento después de 2 segundos
-              this.mensajeDeError = ""
-              }, 2000);
+                this.mensajePasswordError = ""
+                }, 2000);
               return false;
             }
+        },
+        
+        validarFormatoRUT(){
+            const rutRegex = /^[0-9]+[-|‐]{1}[0-9kK]{1}$/;
+            const testRut = rutRegex.test(this.rut);
+            // Validar el formato
+            if (testRut) {
+              console.log("valido")
+              return true;
+            } else {
+              console.log("invalido")
+              this.mensajeRUTError = "RUT invalido"
+              setTimeout(()=> {
+                this.mensajeRUTError = ""
+                }, 2000);
+              return false;
+            }
+
         },
         successMessage() {
             this.mensajes.push({ content: '✔️ Inicio de sesión exitoso, redirigiendo...', id: this.count++ });
@@ -129,8 +148,9 @@
                 "password": this.password
             })
             .then((result) => {
-                const formato = this.validarFormato(this.rut);
-                if(this.rut != "" && this.password != "" && formato && result.data){
+                const validarFormatoPassword = this.validarFormatoPassword();
+                const validarFormatoRUT = this.validarFormatoRUT();
+                if(validarFormatoPassword && validarFormatoRUT && result.data){
                   this.successMessage();
                   //console.log("rut: "+this.rut);
                   this.$router.push('/home');
