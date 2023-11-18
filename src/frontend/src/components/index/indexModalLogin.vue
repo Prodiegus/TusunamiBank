@@ -50,11 +50,20 @@
           </div>
           <div class="fila" style="color: #0f45ab;font-weight: 800;">
             <p>¿No tienes una cuenta? <a href="#">Registrate</a></p>
-            <transition-group name="p-message" tag="div">
-              <Message v-for="msg of mensajes" :key="msg.id" :severity="msg.severity">{{ msg.content }}</Message>
-            </transition-group>
           </div>
         </div>
+        <div class="floating-alert">
+              <v-alert v-for="msg of mensajes"
+              closable
+              close-label="Close Alert"
+              if="showAlert" 
+              color="#3b5998"
+              
+              dismissible @input="showAlert = false"
+              >
+                {{ msg.content }}
+              </v-alert>
+            </div>
       </div>
     </div>
   </div>
@@ -73,11 +82,15 @@
             flagInicioSesion: true,
             mensajes: [],
             count: 0,
-            mensajeDeError: ''
+            mensajeDeError: '',
+            showAlert: true,
+            tipoMensajes: {
+                success: 'success',
+                error: 'error',
+            }
         }
     },
     methods: {
-
         validarFormato(vrut){
             const rutRegex = /^[0-9]+[-|‐]{1}[0-9kK]{1}$/;
             // Validar el formato
@@ -95,10 +108,10 @@
             }
         },
         successMessage() {
-            this.mensajes.push({ severity: 'success', content: 'Inicio de sesión exitoso, redirigiendo...', id: this.count++ });
+            this.mensajes.push({ content: '✔️ Inicio de sesión exitoso, redirigiendo...', id: this.count++ });
         },
         failedMessage() {
-            this.mensajes.push({ severity: 'error', content: 'Inicio de sesión fallido', id: this.count++ });
+            this.mensajes.push({ content: '❌ Inicio de sesión fallido', id: this.count++ });
         },
         async funcion(){
           const texto1=document.getElementById("rut").value;
@@ -229,6 +242,12 @@ body {
     .facebook-button {
       background-color: #3b5998;
       color: #ffffff;
+    }
+    .floating-alert {
+      position: fixed;
+      top: 85%; /* Puedes ajustar la posición vertical según tus necesidades */
+      right: 2%;
+      transform: translateY(-50%);
     }
 
 </style>
