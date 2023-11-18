@@ -50,7 +50,7 @@
             <button class="boton-iniciar-sesion" @click="login">Iniciar Sesión</button>
           </div>
           <div class="fila" style="color: #0f45ab;font-weight: 800;">
-            <p>¿No tienes una cuenta? <a href="#">Registrate</a></p>
+            <p>¿No tienes una cuenta? <router-link to="index">Iniciar Sesión</router-link></p>
           </div>
         </div>
         <div class="floating-alert">
