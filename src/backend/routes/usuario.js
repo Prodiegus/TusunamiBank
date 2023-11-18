@@ -7,9 +7,9 @@ import usuarioSchema from '../models/usuario';
 
 
 router.post('/addUsuario', async(req, res) => {
-  const body = req.body;  
+  const body = req.body;
   const usuario = usuarioSchema(body)
-  console.log("addUsuario",usuario)       
+  console.log("addUsuario",usuario)
   await usuario.save().then((result) => {
     res.json(
       {"Respuesta" : true
@@ -36,6 +36,31 @@ router.get('/getNumeroUsuarios', async(req, res) => {
   }
 );
 
+router.get('/verificarUsuarioPorSucursal/:sucursal/:rut', async (req, res) => {
+  try {
+    const sucursal = req.params.sucursal;
+    const rutUsuarioActual = req.params.rut;
+
+    const usuariosPorSucursal = await usuarioSchema.find({ _sucursal: sucursal });
+
+    if (usuariosPorSucursal.length === 0) {
+      return res.json({ "Respuesta": true});
+
+    }
+
+    const otroUsuarioConMismoRUT = usuariosPorSucursal.find(user => user.rut === rutUsuarioActual);
+
+    if (otroUsuarioConMismoRUT) {
+      return res.json({"Respuesta": false });
+    }
+
+    res.json({"Respuesta": true});
+
+  } catch (error) {
+    console.error(error);
+    res.json({ error: 'Error interno del servidor' });
+  }
+});
 
 router.get('/getUsuarioByID/:id', async(req, res) => {
   const id = req.params.id;  
