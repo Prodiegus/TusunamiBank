@@ -61,7 +61,6 @@
 <script>
     import API from '@/API.js';
     import Message from 'primevue/message';
-    import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
     export default{
         data () {
