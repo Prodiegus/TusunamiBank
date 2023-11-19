@@ -10,13 +10,6 @@
       </div>
       <div class="form-container">
         <h2 style="color:#103ed4">Crear cuenta</h2>
-        <v-btn size="medium">
-          Iniciar sesión con <br>google
-        </v-btn>
-        <br><br>
-        <v-btn size="medium">
-          Iniciar sesión con <br> facebook
-        </v-btn>
         <form @submit.prevent="login">
           <div class="input-container">
             <label style="color:#103ed4" for="username">Nombre Completo:</label>
@@ -190,7 +183,7 @@
     padding-bottom: 30px;
     padding-top: 10px;
     background-color: #ffffff;
-    border-radius: 5px;
+    border-radius: 0px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   }
   
@@ -209,6 +202,7 @@
     text-align: left;
     text-decoration: underline;
     text-decoration-color: #103ed4;
+    width: 200px;
   }
   
   label {
