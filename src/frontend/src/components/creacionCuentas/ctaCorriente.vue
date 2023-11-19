@@ -2,7 +2,9 @@
     <div>
       <h1 class="titulo">Cuenta de ahorro</h1>
     </div>
-  
+    <div>
+      
+    </div>
 </template>
 
 <script></script>
