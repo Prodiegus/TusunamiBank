@@ -35,26 +35,36 @@
           <div class="fila">
             <div class="input-container">
               <label for="miCuadroDeTexto" style="color: #0f45ab;font-weight: 800;">RUT:</label>
-              <input type="text" id="rut" class="underline-input" name="rut">
-              <p id="mensajeDeError" style="color: red;">{{mensajeDeError}}</p>
+              <input type="text" id="rut" class="underline-input" name="rut" v-model="rut">
+              <p id="mensajeRUTError" style="color: red;">{{mensajeRUTError}}</p>
             </div>
           </div>
           <div class="fila">
             <div class="input-container">
               <label for="password" style="color: #0f45ab;font-weight: 800;">Contraseña</label>
-              <input type="password" id="password" class="underline-input" name="password">
+              <input type="password" id="password" class="underline-input" name="password" v-model="password">
+              <p id="mensajePasswordError" style="color: red;">{{mensajePasswordError}}</p>
             </div>
           </div>
           <div class="fila">
             <button class="boton-iniciar-sesion" @click="login">Iniciar Sesión</button>
           </div>
           <div class="fila" style="color: #0f45ab;font-weight: 800;">
-            <p>¿No tienes una cuenta? <a href="#">Registrate</a></p>
-            <transition-group name="p-message" tag="div">
-              <Message v-for="msg of mensajes" :key="msg.id" :severity="msg.severity">{{ msg.content }}</Message>
-            </transition-group>
+            <p>¿No tienes una cuenta? <router-link to="index">Iniciar Sesión</router-link></p>
           </div>
         </div>
+        <div class="floating-alert">
+              <v-alert v-for="msg of mensajes"
+              closable
+              close-label="Close Alert"
+              if="showAlert" 
+              color="#3b5998"
+              
+              dismissible @input="showAlert = false"
+              >
+                {{ msg.content }}
+              </v-alert>
+            </div>
       </div>
     </div>
   </div>
@@ -73,32 +83,55 @@
             flagInicioSesion: true,
             mensajes: [],
             count: 0,
-            mensajeDeError: ''
+            mensajeRUTError: '',
+            mensajePasswordError: '',
+            showAlert: true,
+            tipoMensajes: {
+                success: 'success',
+                error: 'error',
+            }
         }
     },
     methods: {
-
-        validarFormato(vrut){
-            const rutRegex = /^[0-9]+[-|‐]{1}[0-9kK]{1}$/;
+        validarFormatoPassword(){
+            const passwordRegex = /^(?=.*[0-9])[a-zA-Z0-9]{6,}$/;
+            const testPass =passwordRegex.test(this.password);
             // Validar el formato
-            if (rutRegex.test(vrut)) {
+            if (testPass) {
               console.log("valido")
               return true;
             } else {
               console.log("invalido")
-              this.mensajeDeError = "RUT invalido"
+              this.mensajePasswordError = "Contraseña invalida"
               setTimeout(()=> {
-            // Ocultar el elemento después de 2 segundos
-              this.mensajeDeError = ""
-              }, 2000);
+                this.mensajePasswordError = ""
+                }, 2000);
               return false;
             }
         },
+        
+        validarFormatoRUT(){
+            const rutRegex = /^[0-9]+[-|‐]{1}[0-9kK]{1}$/;
+            const testRut = rutRegex.test(this.rut);
+            // Validar el formato
+            if (testRut) {
+              console.log("valido")
+              return true;
+            } else {
+              console.log("invalido")
+              this.mensajeRUTError = "RUT invalido"
+              setTimeout(()=> {
+                this.mensajeRUTError = ""
+                }, 2000);
+              return false;
+            }
+
+        },
         successMessage() {
-            this.mensajes.push({ severity: 'success', content: 'Inicio de sesión exitoso, redirigiendo...', id: this.count++ });
+            this.mensajes.push({ content: '✔️ Inicio de sesión exitoso, redirigiendo...', id: this.count++ });
         },
         failedMessage() {
-            this.mensajes.push({ severity: 'error', content: 'Inicio de sesión fallido', id: this.count++ });
+            this.mensajes.push({ content: '❌ Inicio de sesión fallido', id: this.count++ });
         },
         async funcion(){
           const texto1=document.getElementById("rut").value;
@@ -107,19 +140,23 @@
           console.log("contraseña:"+texto2);
         },
         async login() {
-            const rut=document.getElementById("rut").value;
-            const password=document.getElementById("password").value;
+            //const rut=document.getElementById("rut").value;
+            //const password=document.getElementById("password").value;
             
             await API.logusuario({
-                "rut": rut,
-                "password": password
+                "rut": this.rut,
+                "password": this.password
             })
             .then((result) => {
-                if(rut != "" && password != "" && this.validarFormato(rut) && result.resplogin){
+                const validarFormatoPassword = this.validarFormatoPassword();
+                const validarFormatoRUT = this.validarFormatoRUT();
+                if(validarFormatoPassword && validarFormatoRUT && result.data){
                   this.successMessage();
+                  //console.log("rut: "+this.rut);
                   this.$router.push('/home');
                 }else{
                     this.failedMessage();
+                    console.log("password: "+this.password);
                 }	
             })
             .catch((err) => {
@@ -229,6 +266,12 @@ body {
     .facebook-button {
       background-color: #3b5998;
       color: #ffffff;
+    }
+    .floating-alert {
+      position: fixed;
+      top: 85%; /* Puedes ajustar la posición vertical según tus necesidades */
+      right: 2%;
+      transform: translateY(-50%);
     }
 
 </style>
