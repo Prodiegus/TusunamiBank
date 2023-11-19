@@ -10,6 +10,11 @@ const routes = [
     path: '/home',
     name: 'home',
     component: () => import('./pages/home.vue'),
+  },
+  {
+    path: '/iniciarSesion',
+    name: 'iniciarSesion',
+    component: () => import('./pages/iniciarSesion.vue'),
   }
 ];
 

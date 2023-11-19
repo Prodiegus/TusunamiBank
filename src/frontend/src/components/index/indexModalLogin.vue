@@ -2,66 +2,65 @@
 <!-- Debe contener la logica para redireccionar hacia home.vue si existe un login correcto-->
 
 <template>
-    <div class="contenedor">
-      <div class="columna1">
-        <div class="fila" style="color: red; text-align: center; font-weight:800; font-size: 40px ;">Bancos <br>Tusunami
+  
+  <div class="contenedor">
+    <div class="columna1">
+      <div class="fila" style="color: red; text-align: center; font-weight:800; font-size: 40px ;">Bancos <br>Tusunami
+      </div>
+      <div>
+        <img src="../../assets/pinera.png" alt="Logo" style="width: 65%;height: 100%;margin-top: 20px;">
+      </div>
+    </div>
+
+    <div class="columna2">
+      <div style="height: 80vh;background-color: white;border-radius: 30px;">
+        <div class="fila"
+          style="text-align: center;color:#0f45ab; margin-top: 30px;font-weight: 800;font-size: 30px;">
+          Inicia Sesión
         </div>
-        <div>
-          <img src="../../assets/pinera.png" alt="Logo" style="width: 65%;height: 100%;margin-top: 20px;">
+
+        <div class="fila">
+          <div class="input-container">
+            <label for="miCuadroDeTexto" style="color: #0f45ab;font-weight: 800;">RUT:</label>
+            <input type="text" id="rut" class="underline-input" name="rut" v-model="rut">
+            <p id="mensajeRUTError" style="color: red;">{{mensajeRUTError}}</p>
+          </div>
+        </div>
+        <div class="fila">
+          <div class="input-container">
+            <label for="password" style="color: #0f45ab;font-weight: 800;">Contraseña</label>
+            <input type="password" id="password" class="underline-input" name="password" v-model="password">
+            <p id="mensajePasswordError" style="color: red;">{{mensajePasswordError}}</p>
+          </div>
+        </div>
+        <div class="fila">
+          <button class="boton-iniciar-sesion" @click="login">Iniciar Sesión</button>
+        </div>
+        <div class="fila" style="color: #0f45ab;font-weight: 800;">
+          <p>¿No tienes una cuenta? <a href="#"><router-link to="/">Registrate</router-link></a></p>
+          <transition-group name="p-message" tag="div">
+            <Message v-for="msg of mensajes" :key="msg.id" :severity="msg.severity">{{ msg.content }}</Message>
+          </transition-group>
         </div>
       </div>
-
-      <div class="columna2">
-        <div style="height: 80vh;background-color: white;border-radius: 30px;">
-          <div class="fila"
-            style="text-align: center;color:#0f45ab; margin-top: 30px;font-weight: 800;font-size: 30px;">
-            Inicia Sesión
+      <div class="floating-alert">
+            <v-alert v-for="msg of mensajes"
+            closable
+            close-label="Close Alert"
+            if="showAlert" 
+            color="#3b5998"
+            
+            dismissible @input="showAlert = false"
+            >
+              {{ msg.content }}
+            </v-alert>
           </div>
-
-          <div class="fila">
-            <div class="input-container">
-              <label for="miCuadroDeTexto" style="color: #0f45ab;font-weight: 800;">RUT:</label>
-              <input type="text" id="rut" class="underline-input" name="rut" v-model="rut">
-              <p id="mensajeRUTError" style="color: red;">{{mensajeRUTError}}</p>
-            </div>
-          </div>
-          <div class="fila">
-            <div class="input-container">
-              <label for="password" style="color: #0f45ab;font-weight: 800;">Contraseña</label>
-              <input type="password" id="password" class="underline-input" name="password" v-model="password">
-              <p id="mensajePasswordError" style="color: red;">{{mensajePasswordError}}</p>
-            </div>
-          </div>
-          <div class="fila">
-            <button class="boton-iniciar-sesion" @click="login">Iniciar Sesión</button>
-          </div>
-          <div class="fila" style="color: #0f45ab;font-weight: 800;">
-            <p>¿No tienes una cuenta? <a href="#"><router-link to="/">Registrate</router-link></a></p>
-            <transition-group name="p-message" tag="div">
-              <Message v-for="msg of mensajes" :key="msg.id" :severity="msg.severity">{{ msg.content }}</Message>
-            </transition-group>
-          </div>
-        </div>
-        <div class="floating-alert">
-              <v-alert v-for="msg of mensajes"
-              closable
-              close-label="Close Alert"
-              if="showAlert" 
-              color="#3b5998"
-              
-              dismissible @input="showAlert = false"
-              >
-                {{ msg.content }}
-              </v-alert>
-            </div>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
     import API from '@/API.js';
-  
 
     export default{
         data () {
@@ -166,6 +165,7 @@ body {
 
 .contenedor {
   display: flex;
+  height: 100%;
   background-color: #d9d9d9;
 }
 

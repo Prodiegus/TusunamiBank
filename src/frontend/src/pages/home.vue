@@ -7,9 +7,6 @@
     import leftPanel from '../components/home/leftPanel.vue';
     import mainPanel from '../components/home/mainPanel.vue';
 
-
-
-
 </script>
 
 <template>
