@@ -2,26 +2,12 @@
 <!-- Debe contener la logica para redireccionar hacia home.vue si existe un login correcto-->
 
 <template>
-  <div >
-    <div>
-    <v-toolbar
-      dark
-      prominent
-  
-    >
-      <v-toolbar-title>Bancos tusunami</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-      <v-btn variant="plain"><router-link to="landing" p style="color: black;" >Volver al Inicio</router-link></v-btn>
-    </v-toolbar>
-  </div>
     <div class="contenedor">
       <div class="columna1">
         <div class="fila" style="color: red; text-align: center; font-weight:800; font-size: 40px ;">Bancos <br>Tusunami
         </div>
         <div>
-          <center><img src="../../assets/pinera.png" alt="Logo" style="width: 65%;height: 100%;margin-top: 20px;"></center>
+          <img src="../../assets/pinera.png" alt="Logo" style="width: 65%;height: 100%;margin-top: 20px;">
         </div>
       </div>
 
