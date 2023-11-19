@@ -1,10 +1,15 @@
 <template>
-    <h1>porque no se ve estoooooo</h1>
-  <div>
-    <v-btn> Button </v-btn>
+  <div class="titulo">
+    <h1>Cuenta de ahorro</h1>
   </div>
 </template>
 
 <script></script>
 
-<style></style>
+<style>
+.titulo{
+  text-align: center;
+  padding: 2rem;
+  color: white;
+}
+</style>
