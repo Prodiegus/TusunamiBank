@@ -129,7 +129,6 @@ router.delete('/deleteUsuarioByID', async(req, res) => {
 );
 
 router.post('/logusuario', async(req, res) => {
-  console.log(req.body)
   const rut = req.body.rut;
   const password = req.body.password;
 
