@@ -9,27 +9,28 @@
 
 				<v-col cols="3" style="min-width: 33%;">
 					<v-card class="plan">
-						<v-card-title class="titulo">Plan n1</v-card-title>
-						<v-card-item class="imagen"><img src="/plan1.jpeg" alt="Logo"
-								style="width: 100%;height: 300px;"></v-card-item>
-						<v-btn block rounded="lg" style="background-color:#d52b1e ; color: white;">Contratar</v-btn>
+						<v-card-title class="titulo">Cuenta Básica</v-card-title>
+						<v-card-item class="imagen"><img src="/planbasico.png" alt="Logo"
+								style="width: 100%;height: 50%;"></v-card-item>
+						<v-btn block rounded="lg" style="background-color:#FF0000 ;">Contratar</v-btn>
 					</v-card>
 				</v-col>
 
 				<v-col cols="3" style="min-width: 33%;">
 					<v-card class="plan">
-						<v-card-title class="titulo">Plan n2</v-card-title>
-						<v-card-item class="imagen"></v-card-item>
-						<v-btn block rounded="lg" style="background-color:#d52b1e ; color: white;">Contratar</v-btn>
+						<v-card-title class="titulo">Cuenta Estándar</v-card-title>
+						<v-card-item class="imagen"><img src="/plancomun.png" alt="Logo"
+								style="width: 100%;height: 50%;"></v-card-item>
+						<v-btn block rounded="lg" style="background-color:#964B00;">Contratar</v-btn>
 					</v-card>
 				</v-col>
 
 				<v-col cols="3" style="min-width: 33%;">
 					<v-card class="plan">
-						<v-card-title class="titulo">Plan n3</v-card-title>
-						<v-card-item class="imagen"><img src="/plan3.jpg" alt="Logo"
-								style="width: 100%;height: 300px;"></v-card-item>
-						<v-btn block rounded="lg" style="background-color:#d52b1e ; color: white;">Contratar</v-btn>
+						<v-card-title class="titulo">Cuenta Premium</v-card-title>
+						<v-card-item class="imagen"><img src="/planpremium.png" alt="Logo"
+								style="width: 100%;height: 50%;"></v-card-item>
+						<v-btn block rounded="lg" style="background-color:#0000FF;">Contratar</v-btn>
 					</v-card>
 				</v-col>
 
@@ -43,15 +44,13 @@
 <style scoped>
 
 body {
-	background-color: white;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100vh;
+  background-color: lightblue;
 }
 
 .main {
-	height: 100vh;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
@@ -78,6 +77,28 @@ h1 {
 }
 
 .imagen {
-	height: 500px;
+  overflow: hidden;
+}
+
+.imagen img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10%;
+  transition: border-radius 0.3s ease-in-out;
+}
+
+.imagen:hover img {
+  border-radius: 0;
+}
+
+
+
+.v-btn {
+  color: white;
+}
+
+.v-col_hover{
+	transition: background-color 0.3s ease-in-out;
+	box-shadow: 0px 0px 40px 20px #0ff;
 }
 </style>
