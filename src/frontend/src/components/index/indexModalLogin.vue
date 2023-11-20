@@ -117,37 +117,21 @@
         failedMessage() {
             this.mensajes.push({ content: '❌ Inicio de sesión fallido', id: this.count++ });
         },
-        async funcion(){
-          const texto1=document.getElementById("rut").value;
-          const texto2=document.getElementById("password").value;
-          console.log("rut:"+texto1);
-          console.log("contraseña:"+texto2);
-        },
         async login() {
-            //const rut=document.getElementById("rut").value;
-            //const password=document.getElementById("password").value;
-            
-            await API.logusuario({
+    
+            const result = await API.logusuario({
                 "rut": this.rut,
                 "password": this.password,
-                return: this.rut==rut && this.password==password
             })
-            .then((result) => {
-                console.log(result);
-                const validarFormatoPassword = this.validarFormatoPassword();
-                const validarFormatoRUT = this.validarFormatoRUT();
-                if(validarFormatoPassword && validarFormatoRUT && result){
-                  this.successMessage();
-                  //console.log("rut: "+this.rut);
-                  this.$router.push('/home');
-                }else{
-                    this.failedMessage();
-                    console.log("password: "+this.password);
-                }	
-            })
-            .catch((err) => {
-                console.log(err)
-            }); 
+            const validarFormatoPassword = this.validarFormatoPassword();
+            const validarFormatoRUT = this.validarFormatoRUT();
+            if(validarFormatoPassword && validarFormatoRUT && result.resplogin === true){
+              this.successMessage();  
+              this.$router.push('/home');
+            }else{
+              this.failedMessage();
+              console.log("password: "+this.password);
+            }	
      
         },
     }
