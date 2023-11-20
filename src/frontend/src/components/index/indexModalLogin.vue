@@ -37,7 +37,7 @@
           <button class="boton-iniciar-sesion" @click="login">Iniciar Sesión</button>
         </div>
         <div class="fila" style="color: #0f45ab;font-weight: 800;">
-          <p>¿No tienes una cuenta? <a href="#"><router-link to="/">Registrate</router-link></a></p>
+          <p>¿No tienes una cuenta? <a href="#"><router-link to="/registro">Registrate</router-link></a></p>
         </div>
       </div>
       <div class="floating-alert">
@@ -82,10 +82,10 @@
             const testPass =passwordRegex.test(this.password);
             // Validar el formato
             if (testPass) {
-              console.log("valido")
+              console.log("contraseña valida")
               return true;
             } else {
-              console.log("invalido")
+              console.log("contraseña invalida")
               this.mensajePasswordError = "Contraseña invalida"
               setTimeout(()=> {
                 this.mensajePasswordError = ""
@@ -99,10 +99,10 @@
             const testRut = rutRegex.test(this.rut);
             // Validar el formato
             if (testRut) {
-              console.log("valido")
+              console.log("Rut valido")
               return true;
             } else {
-              console.log("invalido")
+              console.log("Rut invalido")
               this.mensajeRUTError = "RUT invalido"
               setTimeout(()=> {
                 this.mensajeRUTError = ""

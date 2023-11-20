@@ -52,7 +52,7 @@
 
 					<div>
 						<h3 style="color:#103ed4">¿Ya tienes cuenta?
-							<router-link to="/logintest">Iniciar Sesión</router-link>
+							<router-link to="/iniciarSesion">Iniciar Sesión</router-link>
 							<br><br>
 						</h3>
 					</div>
@@ -113,7 +113,7 @@ const crearUsuario = async () => {
     });
     console.log("Registro exitoso");
   
-    router.push({ path: '/logintest' });
+    router.push({ path: '/iniciarSesion' });
   } else {
     Swal.fire({
       icon: 'error',
