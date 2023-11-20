@@ -23,6 +23,11 @@ const routes = [
     name: 'logintest',
     component: () => import('./pages/logintest.vue'),
   },
+  {
+    path: '/cuentadeahorro',
+    name: 'cuentadeahorro',
+    component: () => import('./pages/cuentadeahorro.vue'),
+  },
 ];
 
 const router = createRouter({

@@ -154,7 +154,7 @@ export default {
 };
 </script>
   
-<style setup>
+<style scoped>
 .registro-container {
   background-color: #d9d9d9;
   display: flex;
