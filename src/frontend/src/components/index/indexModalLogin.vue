@@ -129,12 +129,14 @@
             
             await API.logusuario({
                 "rut": this.rut,
-                "password": this.password
+                "password": this.password,
+                return: this.rut==rut && this.password==password
             })
             .then((result) => {
+                console.log(result);
                 const validarFormatoPassword = this.validarFormatoPassword();
                 const validarFormatoRUT = this.validarFormatoRUT();
-                if(validarFormatoPassword && validarFormatoRUT && result.data){
+                if(validarFormatoPassword && validarFormatoRUT && result){
                   this.successMessage();
                   //console.log("rut: "+this.rut);
                   this.$router.push('/home');
