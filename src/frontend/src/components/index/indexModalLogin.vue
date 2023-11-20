@@ -38,9 +38,6 @@
         </div>
         <div class="fila" style="color: #0f45ab;font-weight: 800;">
           <p>¿No tienes una cuenta? <a href="#"><router-link to="/">Registrate</router-link></a></p>
-          <transition-group name="p-message" tag="div">
-            <Message v-for="msg of mensajes" :key="msg.id" :severity="msg.severity">{{ msg.content }}</Message>
-          </transition-group>
         </div>
       </div>
       <div class="floating-alert">
