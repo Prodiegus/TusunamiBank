@@ -35,13 +35,14 @@
   import Swal from 'sweetalert2';
   import { useRouter } from 'vue-router';
 
-  const nRetiros = ref(0);
-  const numeroCuenta = ref('');
-  const comisionMensual = ref(0);
-  const interes = ref(0);
-  const sucursal = ref('');
+  const nRetiros = ref(1);
+  //const numeroCuenta = ref('');
+  const comisionMensual = ref(1);
+  const interes = ref(1);
+  const saldo = ref(1);
+  const sucursal = ref('default');
   const idUsuario = ref('');
-  const saldo = ref(0);
+  
 
 
   const router = useRouter();
@@ -72,27 +73,36 @@
     console.log("data de rut: " + confirmarRut.Respuesta)
     if (confirmarRut.Respuesta === true) {
       console.log("SE CREA EN LA BASE DE DATOS");
-      //const response = await API.addCuentaVista({
-      //  "nRetiros": nRetiros.value,
-      //  "numeroCuenta": numeroDeCuentaVista + 1,
-      //  "comisionMensual": comisionMensual.value,
-      //  "interes": interes.value,
-      //  "saldo": saldo.value,
-      //  "sucursal": sucursal.value, //ref susucrsal
-      //  "idUsuario": rutValid.value //ref usuario
-    //});
-      Swal.fire(
+      const response = await API.addCuentaVista({
+        "nRetiros": nRetiros.value,
+        "numeroCuenta": numeroDeCuentaVista + 1,
+        "comisionMensual": comisionMensual.value,
+        "interes": interes.value,
+        "saldo": saldo.value,
+        "sucursal": sucursal.value, //ref susucrsal
+        "idUsuario": rutValid //ref usuario
+      });
+      if(response.Respuesta == true){
+        Swal.fire(
               '¡Cuenta Vista creada!',
               'Tu cuenta Vista ha sido creada con éxito.',
               'success'
             )
             router.push('/home');
+        }else{
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Algo salió mal!',
+          })
+        }
+
     }else{
 
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'El rut ingresado no existe',
+        text: '¡El rut ingresado no es correcto!',
       })
       return;
 

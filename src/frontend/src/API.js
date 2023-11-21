@@ -65,4 +65,12 @@ export default class API {
             return error.response.data
         }
     }
+    static async addCuentaVista(data) {
+        try {
+            const res = await axios.post(url + "addCuentaVista", data)
+            return res.data
+        } catch (error) {
+            return error.response.data
+        }
+    }
 }

@@ -7,8 +7,8 @@ const cuentaVistaSchema = new Schema({
     comisionMensual: Number,
     interes: Number,
     saldo: Number,
-    sucursal: Number, //ref susucrsal
-    idUsuario: Number //ref usuario
+    sucursal: String, //ref susucrsal
+    idUsuario: String //ref usuario
 },{ versionKey: false }
 );
 
