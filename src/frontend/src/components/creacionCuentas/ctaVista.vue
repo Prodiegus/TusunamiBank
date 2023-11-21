@@ -5,7 +5,7 @@
             Crear Cuenta Vista
             </div>
           <div class="fila">      
-                <img src="https://trello.com/1/cards/65580134806d32daf11db3ad/attachments/655a939cb9d13cdfd65def49/previews/655a939db9d13cdfd65df04f/download/pic3b1era-meme.png">          
+              <img src="../icons/Piñera.png">
             <div class="input-container">
                 <p for="miCuadroDeTexto" style="color: #0f45ab;font-weight: 700;">La cuenta Vista es la más limitada (para rotos), con un limite de saldo de $2,500,000,
                 lo que significa que no puedes realizar depósitos sobre ese monto. Asimismo, no pueden realizarse retiros por debajo de $0 pesos, y solo los primeros 4 retiros
