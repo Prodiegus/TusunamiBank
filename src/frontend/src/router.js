@@ -21,6 +21,13 @@ const routes = [
     name: 'creacioncuentas',
     component: () => import('./pages/creacioncuentas.vue'),
   },
+
+  {
+    path: '/ctaVista',
+    name: 'ctaVista',
+    component: () => import('./components/creacionCuentas/ctaVista.vue'),
+  },
+
   {
     path: '/iniciarSesion',
     name: 'iniciarSesion',
