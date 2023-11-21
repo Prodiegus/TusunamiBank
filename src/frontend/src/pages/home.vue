@@ -81,19 +81,19 @@
 
 <template>
     <div class="main">
-        <Row>
+        <div>
             <topPanel></topPanel>
-        </Row>
-        <Row class="contenedor">
-            <Column class="item">
+        </div>
+        <div class="contenedor">
+            <div class="item">
                 <leftPanel @tipo-cuenta="cambiarCuenta"></leftPanel>
-            </Column>
-            <Column class="item">
+            </div>
+            <div class="item">
                 <mainPanel  v-if="cuentaTipo.mostrarCorriente" :infoCuenta='infoCorriente' :listaTransacciones='transaccionesCorriente'></mainPanel>
                 <mainPanel  v-if="cuentaTipo.mostrarVista" :infoCuenta='infoVista' :listaTransacciones='transaccionesVista'></mainPanel>
                 <mainPanel v-if="cuentaTipo.mostrarAhorro" :infoCuenta='infoAhorro' :listaTransacciones='transaccionesAhorro'></mainPanel>
-            </Column>
-        </Row>
+            </div>
+        </div>
     </div>
 </template>
 

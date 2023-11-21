@@ -27,7 +27,7 @@
 <template>
     <v-app>
     <div class="primaldiv">
-        <card class="contenedor">
+        <div class="contenedor">
             <div>
                 <div class="d-flex align-center">
                     <img src="../icons/pitufo.jpg" class="icono">
@@ -85,7 +85,7 @@
                 
             
             </div>
-        </card>
+        </div>
     </div>
     </v-app> 
 </template>

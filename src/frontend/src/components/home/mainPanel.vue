@@ -105,13 +105,13 @@
 
 <template>
     <div class="divPrincipal">
-        <row>
+        <div>
         <Card class="cardPrincipal">
             <template #title > 
                 <div style="text-align: center; font-weight: bold; color:black; margin-top: 10px; margin-bottom:10px;">Cuenta {{ props.infoCuenta.tipo }} </div>
             </template>
           <template #content>
-            <column style="height:40%">
+            <div style="height:40%">
             <Card class="cardCuenta">
               <template #content>
                 <div style="margin-top: 20px;">
@@ -120,21 +120,21 @@
                 Sucursal: {{props.infoCuenta.sucursal}}<br>
                 </div>
                 <div>
-                    <row>
+                    <div>
                         <v-btn class="botonDeposito">
                             Realizar Deposito
                         </v-btn>
-                    </row>
-                    <row>
+                    </div>
+                    <div>
                         <v-btn class="botonRetiro">
                             Realizar Retiro
                         </v-btn>
-                    </row>
+                    </div>
                 </div>
               </template>
             </Card>
-            </column>
-            <column>
+        </div>
+            <div>
                 <Card class="cardScroll" style="height: 60%;">
                 <template #title><div style="text-align: center; font-weight: bold; color:black;">Últimas Transacciones</div> </template>
                 <template #content >
@@ -155,12 +155,12 @@
                     </VirtualScroller>
                 </template>
                 </Card>
-            </column>
+            </div>
           </template>
         </Card>
-        </row>
-        <row class="fondoDerecha">
-        </row>
+        </div>
+        <div class="fondoDerecha">
+        </div>
     </div>
   </template>
   
