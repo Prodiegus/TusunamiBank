@@ -35,11 +35,11 @@
   import Swal from 'sweetalert2';
   import { useRouter } from 'vue-router';
 
-  const nRetiros = ref(1);
+  const nRetiros = ref(0);
   //const numeroCuenta = ref('');
-  const comisionMensual = ref(1);
-  const interes = ref(1);
-  const saldo = ref(1);
+  const comisionMensual = ref(0);
+  const interes = ref(0);
+  const saldo = ref(0);
   const sucursal = ref('default');
   const idUsuario = ref('');
   
