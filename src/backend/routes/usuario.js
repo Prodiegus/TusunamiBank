@@ -36,6 +36,7 @@ router.get('/getNumeroUsuarios', async(req, res) => {
   }
 );
 
+
 router.get('/verificarUsuarioPorSucursal/:sucursal/:rut', async (req, res) => {
   try {
     const sucursal = req.params.sucursal;
@@ -78,6 +79,29 @@ router.get('/getUsuarioByID/:id', async(req, res) => {
   }); 
   }
 );
+
+router.get('/confirmarUsuarioByRut/:rut', async(req, res) => { 
+  const rut = req.params.rut;
+  console.log('llego' + rut)
+  const filtro = {"rut":rut}
+  await usuarioSchema.findOne(filtro)
+  .then((result) => {
+    if (result === null) {
+      res.json({
+        "Respuesta": false
+      })
+    }
+    else{
+      res.json({
+        "Respuesta": true
+      })
+    }
+    
+  });
+});
+
+
+
 
 router.post('/getAllUsuarios', async(req, res) => {
 

@@ -23,4 +23,14 @@ router.post('/addCuentaVista', async(req, res) => {
     }); 
 });
 
+router.get('/getNumeroCuentaVista', async(req, res) => {
+    await cuentaVistaSchema.countDocuments().then((result) => {
+        res.json(result)
+    })
+    .catch((err) => {
+        console.log(err)
+        res.json(err)
+    }); 
+});
+
 module.exports = router;

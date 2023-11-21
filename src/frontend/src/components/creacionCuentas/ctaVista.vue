@@ -7,16 +7,17 @@
           <div class="fila">      
                 <img src="https://trello.com/1/cards/65580134806d32daf11db3ad/attachments/655a939cb9d13cdfd65def49/previews/655a939db9d13cdfd65df04f/download/pic3b1era-meme.png">          
             <div class="input-container">
-              <p> 
                 <p for="miCuadroDeTexto" style="color: #0f45ab;font-weight: 700;">La cuenta Vista es la más limitada (para rotos), con un limite de saldo de $2,500,000,
                 lo que significa que no puedes realizar depósitos sobre ese monto. Asimismo, no pueden realizarse retiros por debajo de $0 pesos, y solo los primeros 4 retiros
                 son gratuitos. Cada retiro posterior tiene un costo de $400 pesos.
                 </p>
-              </p>
+                <p style="color: #0f45ab;font-weight: 700; margin-top: 30px; font-size: 17px;">Proporciona tu rut para confirmar</p>
+                <v-otp-input :length="9" v-model="idUsuario" variant="solo-filled"></v-otp-input>
             </div>
           </div>
           <div class="fila">
-            <button class="boton-contratar">Contratar</button>
+
+            <v-btn class="boton-contratar"  @click="contratar" >Contratar</v-btn>
           </div>
       
           <div class="fila" style="color: #0f45ab;font-weight: 800;">
@@ -28,7 +29,79 @@
 
   </template>
   
-  <script>
+  <script setup>
+  import { ref } from 'vue';
+  import API from '@/API.js';
+  import Swal from 'sweetalert2';
+  import { useRouter } from 'vue-router';
+
+  const nRetiros = ref(0);
+  const numeroCuenta = ref('');
+  const comisionMensual = ref(0);
+  const interes = ref(0);
+  const sucursal = ref('');
+  const idUsuario = ref('');
+  const saldo = ref(0);
+
+
+  const router = useRouter();
+  const contratar = async () => {
+    console.log('ENTRA');
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "No podrás revertir esta acción",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      
+      if (result.isConfirmed) {
+        console.log(idUsuario.value);
+        crearCuentaVista();
+      }
+    });
+
+  }
+
+  const crearCuentaVista = async () => {
+    const rutValid = idUsuario.value.slice(0, -1).concat('-', idUsuario.value.slice(-1));
+    console.log('rutvalid: '+ rutValid);
+    const numeroDeCuentaVista = await API.getNumeroCuentaVista();
+    const confirmarRut = await API.confirmarUsuarioByRut(rutValid);
+    console.log("data de rut: " + confirmarRut.Respuesta)
+    if (confirmarRut.Respuesta === true) {
+      console.log("SE CREA EN LA BASE DE DATOS");
+      //const response = await API.addCuentaVista({
+      //  "nRetiros": nRetiros.value,
+      //  "numeroCuenta": numeroDeCuentaVista + 1,
+      //  "comisionMensual": comisionMensual.value,
+      //  "interes": interes.value,
+      //  "saldo": saldo.value,
+      //  "sucursal": sucursal.value, //ref susucrsal
+      //  "idUsuario": rutValid.value //ref usuario
+    //});
+      Swal.fire(
+              '¡Cuenta Vista creada!',
+              'Tu cuenta Vista ha sido creada con éxito.',
+              'success'
+            )
+            router.push('/home');
+    }else{
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El rut ingresado no existe',
+      })
+      return;
+
+  }
+}
+
+
+
+
   </script>
   
   <style >
