@@ -27,7 +27,7 @@
           </div>
       
           <div class="fila" style="color: #0f45ab;font-weight: 800;">
-            <p>¿Aun no confias? <a href="#"><router-link to="/">Volver atras</router-link></a></p>
+            <p>¿Aun no confias? <a href="#"><router-link to="/creacioncuentas">Volver atras</router-link></a></p>
         </div>
     </div>
       
