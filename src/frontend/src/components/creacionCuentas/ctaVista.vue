@@ -12,7 +12,13 @@
                 son gratuitos. Cada retiro posterior tiene un costo de $400 pesos.
                 </p>
                 <p style="color: #0f45ab;font-weight: 700; margin-top: 30px; font-size: 17px;">Proporciona tu rut para confirmar</p>
-                <v-otp-input :length="9" v-model="idUsuario" variant="solo-filled"></v-otp-input>
+               
+
+
+                <v-text-field :rules="[validateInput]" v-model="idUsuario" maxlength="10" color="black" :style="{ color: 'black' } "></v-text-field>
+                <p style="color: black">El rut tiene el siguiente formato: 12345678-9</p>
+
+
             </div>
           </div>
           <div class="fila">
@@ -21,7 +27,7 @@
           </div>
       
           <div class="fila" style="color: #0f45ab;font-weight: 800;">
-            <p>¿Aun no confias? <a href="#"><router-link to="/home">Volver atras</router-link></a></p>
+            <p>¿Aun no confias? <a href="#"><router-link to="/">Volver atras</router-link></a></p>
         </div>
     </div>
       
@@ -43,6 +49,14 @@
   const sucursal = ref('default');
   const idUsuario = ref('');
   
+  
+
+  const validateInput = (value) => {
+      const pattern = /^[0-9kK-]+$/;
+      return pattern.test(value) || 'Ingrese solo números del 0 al 9, guion o la letra "k"';
+    };
+  
+   
 
 
   const router = useRouter();
@@ -66,7 +80,7 @@
   }
 
   const crearCuentaVista = async () => {
-    const rutValid = idUsuario.value.slice(0, -1).concat('-', idUsuario.value.slice(-1));
+    const rutValid = idUsuario.value;
     console.log('rutvalid: '+ rutValid);
     const numeroDeCuentaVista = await API.getNumeroCuentaVista();
     const confirmarRut = await API.confirmarUsuarioByRut(rutValid);
