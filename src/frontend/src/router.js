@@ -24,8 +24,11 @@ const routes = [
     name: 'iniciarSesion',
     component: () => import('./pages/iniciarSesion.vue'),
   },
-
-  */
+  {
+    path: '/cuentadeahorro',
+    name: 'cuentadeahorro',
+    component: () => import('./pages/cuentadeahorro.vue'),
+  },
 ];
 
 const router = createRouter({
