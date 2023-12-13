@@ -18,16 +18,17 @@ const routes = [
     name: 'registro',
     component: () => import('./pages/registro.vue'),
   },
-  /*
+
   {
-    path: '/iniciarSesion',
-    name: 'iniciarSesion',
-    component: () => import('./pages/iniciarSesion.vue'),
+    path: '/logintest',
+    name: 'logintest',
+    component: () => import('./pages/logintest.vue'),
   },
+
   {
-    path: '/cuentadeahorro',
-    name: 'cuentadeahorro',
-    component: () => import('./pages/cuentadeahorro.vue'),
+    path: '/tipoDeCuenta',
+    name: 'tipoDeCuenta',
+    component: () => import('./pages/tipoDeCuenta.vue'),
   },
 ];
 
